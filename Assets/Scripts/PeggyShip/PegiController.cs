@@ -6,7 +6,7 @@ using UnityEngine;
 public class PegiController : MonoBehaviour {
 
     [SerializeField]
-	PegiInput _input;
+    PegiInput _input;
 
     [SerializeField]
     OrbitMovement _orbitMovement;
@@ -23,35 +23,60 @@ public class PegiController : MonoBehaviour {
 
     PlanetController _planet;
 
-	void Start () {
+    void Start () {
         _currentSpeed = _speed;
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
         _orbitMovement.Speed = _speed;
         _orbitMovement.CurrentOrbit = _currentOrbit;
-    }
-	
-	void Update () {
-        SetOrbitPosition();
-		CheckShoot();
+
     }
 
-	private void CheckShoot()
-	{
-		if (_input.Shooting) 
-		{
-			//Debug.Log ("HI");
-			
-			RaycastHit HitInfo = new RaycastHit();
+        
+
+    void Update () {
+        if (!LevelManager.Instance.IsAbducting)
+        {
+            SetOrbitPosition();
+            CheckShoot();
+        }
+        else
+        {
+            CheckFinishAbduction();
+            CheckInputChallenge();
+        }
+    }
+
+    private void CheckInputChallenge()
+    {
+
+    }
+
+    private void CheckFinishAbduction()
+    {
+        if (_input.Shooting)
+        {
+            LevelManager.Instance.SetAbductionMode(false);
+        }
+
+
+    }
+
+    private void CheckShoot()
+    {
+        if (_input.Shooting) 
+        {
+            //Debug.Log ("HI");
+            RaycastHit HitInfo = new RaycastHit();
             Vector2 dir = (Vector2)(_planet.transform.position - transform.position).normalized;
             ContactFilter2D contact2D = new ContactFilter2D();
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
             if(hit.collider != null)
             {
-                Debug.Log(hit.collider.name);
-
+                LevelManager.Instance.SetAbductionMode(true);
+                
             }
-		}
-	}
+        }
+    }
 
     private void SetOrbitPosition()
     {
@@ -64,6 +89,7 @@ public class PegiController : MonoBehaviour {
             {
                 _currentOrbit = newOrbit;
                 _orbitTimeStamp = _orbitCoolDown;
+                _orbitMovement.CurrentOrbit = _currentOrbit;
             }
         }
     }

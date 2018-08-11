@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,5 +29,10 @@ public class AnimalController : MonoBehaviour {
     public ETypeAnimal GetAnimalType()
     {
         return _typeAnimal;
+    }
+
+    internal void UpdateAnimal()
+    {
+        
     }
 }

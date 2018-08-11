@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,11 +29,6 @@ public class PlanetController : MonoBehaviour {
         return _orbit01;
     }
 
-	public void Update()
-	{
-		transform.rotation = Quaternion.Euler (0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
-	}
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -41,5 +37,10 @@ public class PlanetController : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, _orbit01);
         Gizmos.DrawWireSphere(transform.position, _orbit02);
         Gizmos.DrawWireSphere(transform.position, _orbit03);
+    }
+
+    public void UpdatePlanet()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
     }
 }

@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
+    public bool IsAbducting;
+
+    public event DelegateVoidFunctionBoolParameter OnChangeAbductionState;
+
 
     [SerializeField]
     Transform _animalParent;
@@ -16,7 +20,12 @@ public class LevelManager : MonoBehaviour
 
     public List<AnimalController> _animalPrefabs;
 
-
+    [Header("Level Elements")]
+    [SerializeField]
+    List<AnimalController> _allAnimals = new List<AnimalController>();
+    [SerializeField]
+    PlanetController _planet;
+    
     void Start()
     {
         StartLevel();
@@ -25,7 +34,6 @@ public class LevelManager : MonoBehaviour
     void StartLevel()
     {
         GemerateStartedAnimals();
-
     }
 
     private void GemerateStartedAnimals()
@@ -35,9 +43,9 @@ public class LevelManager : MonoBehaviour
         for (int i = _animalPoblation.Count - 1; i >= 0; --i)
         {
             animal = GetPrefab(_animalPoblation[i].AnimalType);
-            if(animal == null)
+            if (animal == null)
             {
-                Debug.LogWarning("Animal "+_animalPoblation[i].AnimalType+" not found in prefabs");
+                Debug.LogWarning("Animal " + _animalPoblation[i].AnimalType + " not found in prefabs");
                 continue;
             }
 
@@ -49,12 +57,21 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    internal void SetAbductionMode(bool setAbduction)
+    {
+        IsAbducting = setAbduction;
+        if (OnChangeAbductionState != null)
+            OnChangeAbductionState(IsAbducting);
+    }
+
     private void GenerateAnimal(AnimalController animal)
     {
         var temp = Instantiate<AnimalController>(animal, _animalParent);
         temp.Init(animal.GetAnimalType());
         Vector2 point = UnityEngine.Random.insideUnitCircle;
         temp.transform.position = point;
+
+        _allAnimals.Add(temp);
     }
 
     AnimalController GetPrefab(ETypeAnimal animalType)
@@ -72,6 +89,16 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update Animals
+        for (int i = 0; i < _allAnimals.Count; ++i)
+        {
+            _allAnimals[i].UpdateAnimal();
+        }
 
+        // update Planet
+        if (!IsAbducting)
+        {
+            _planet.UpdatePlanet();
+        }
     }
 }

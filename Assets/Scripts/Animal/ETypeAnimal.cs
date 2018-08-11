@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ETypeAnimal {
+public enum ETypeAnimal
+{
     Cow,
+    Scorpion,
+    Shark,
+
+
+    Size,
 
 }
 
