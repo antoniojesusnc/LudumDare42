@@ -128,10 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f481932a45f3447a7866b2ebc5c14e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _surface: 5
-  _orbit01: 6.32
-  _orbit02: 9.75
-  _orbit03: 22.4
+  _surface: 6.64
+  _orbit01: 7.7
+  _orbit02: 8.18
+  _orbit03: 8.72
+  _space: 8.72
   _angularVelocity: 2
 --- !u!212 &212452235559389176
 SpriteRenderer:

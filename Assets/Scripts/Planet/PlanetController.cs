@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetController : MonoBehaviour {
+public class PlanetController : MonoBehaviour
+{
 
     [SerializeField]
     float _surface;
@@ -14,8 +15,10 @@ public class PlanetController : MonoBehaviour {
     float _orbit02;
     [SerializeField]
     float _orbit03;
-	[SerializeField]
-	float _angularVelocity;
+    [SerializeField]
+    float _space;
+    [SerializeField]
+    float _angularVelocity;
 
     public float GetOrbitPosition(int orbit)
     {
@@ -25,6 +28,7 @@ public class PlanetController : MonoBehaviour {
             case 1: return _orbit01;
             case 2: return _orbit02;
             case 3: return _orbit03;
+            case 4: return _space;
         }
         return _orbit01;
     }
@@ -33,10 +37,11 @@ public class PlanetController : MonoBehaviour {
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _surface);
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(transform.position, _orbit01);
         Gizmos.DrawWireSphere(transform.position, _orbit02);
         Gizmos.DrawWireSphere(transform.position, _orbit03);
+        Gizmos.DrawWireSphere(transform.position, _space);
     }
 
     public void UpdatePlanet()

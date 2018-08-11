@@ -25,7 +25,7 @@ public class AnimalController : MonoBehaviour {
 
         _typeAnimal = typeAnimal;
     }
-	
+    
     public ETypeAnimal GetAnimalType()
     {
         return _typeAnimal;
