@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class AnimalController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    [SerializeField]
+    InputController _input;
+    [SerializeField]
+    OrbitMovement _orbitMovement;
+
+    [SerializeField]
+    float _speed;
+
+   
+
+    void Start () {
+        _orbitMovement.Speed = _speed;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

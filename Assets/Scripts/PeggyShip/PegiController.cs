@@ -6,7 +6,10 @@ using UnityEngine;
 public class PegiController : MonoBehaviour {
 
     [SerializeField]
-    PegiInput _input;
+    InputController _input;
+
+    [SerializeField]
+    OrbitMovement _orbitMovement;
 
     [SerializeField]
     float _speed;
@@ -22,12 +25,12 @@ public class PegiController : MonoBehaviour {
 
 	void Start () {
         _currentSpeed = _speed;
-
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
+        _orbitMovement.Speed = _speed;
+        _orbitMovement.CurrentOrbit = _currentOrbit;
     }
 	
-	void LateUpdate () {
-        transform.position += _input.Momentum.x * _speed * transform.right* Time.deltaTime;
+	void Update () {
         SetOrbitPosition();
     }
 
@@ -44,13 +47,5 @@ public class PegiController : MonoBehaviour {
                 _orbitTimeStamp = _orbitCoolDown;
             }
         }
-
-        float orbitPosition = _planet.GetOrbitPosition(_currentOrbit);
-
-        Vector3 dirToPlanet = (transform.position - _planet.transform.position ).normalized;
-
-        transform.position =  dirToPlanet* orbitPosition;
-
-        transform.up = dirToPlanet;
     }
 }
