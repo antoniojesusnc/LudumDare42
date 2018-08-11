@@ -54,7 +54,6 @@ public class PegiController : MonoBehaviour
 
     float _orbitTimeStamp;
     float _currentSpeed;
-    bool _animChangeOrbit;
 
     PlanetController _planet;
 
@@ -64,6 +63,8 @@ public class PegiController : MonoBehaviour
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
         _orbitMovement.Speed = _speed;
         _orbitMovement.CurrentOrbit = _currentOrbit;
+        _orbitMovement.Acceleration = _acceleration;
+        _orbitMovement.Decceleration = _decceleration;
     }
 
     void Update()

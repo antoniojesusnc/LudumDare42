@@ -448,6 +448,21 @@ Prefab:
       propertyPath: m_PlayAutomatically
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114573960115805180, guid: e75590c832f725449b83352c55821519,
+        type: 2}
+      propertyPath: _acceleration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114573960115805180, guid: e75590c832f725449b83352c55821519,
+        type: 2}
+      propertyPath: _decceleration
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 114371259069852598, guid: e75590c832f725449b83352c55821519,
+        type: 2}
+      propertyPath: _useInertia
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 111167924771046196, guid: e75590c832f725449b83352c55821519, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e75590c832f725449b83352c55821519, type: 2}

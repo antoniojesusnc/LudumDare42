@@ -13,7 +13,7 @@ public class OrbitMovement : MonoBehaviour
     bool _flipIfRight;
 
     [SerializeField]
-    bool _userInertia;
+    bool _useInertia;
     [SerializeField]
     public float Acceleration { get; set; }
     [SerializeField]
@@ -29,7 +29,6 @@ public class OrbitMovement : MonoBehaviour
         set
         {
             _speed = value;
-            _currentSpeed = value;
         }
     }
     float _currentSpeed;
@@ -41,7 +40,6 @@ public class OrbitMovement : MonoBehaviour
 
     void Start()
     {
-        _currentSpeed = Speed;
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
     }
 
@@ -50,8 +48,24 @@ public class OrbitMovement : MonoBehaviour
         if (_flipIfRight)
             CheckFlip();
 
-        transform.position += _input.Momentum.x * _currentSpeed * transform.right * Time.deltaTime;
+        if (_useInertia)
+        {
+            _currentSpeed += Acceleration * _input.Momentum.x ;
+            _currentSpeed = Mathf.Clamp(_currentSpeed, -Speed, Speed);
+        }
+        else
+        {
+            _currentSpeed = _input.Momentum.x * Speed ;
+
+        }
+
+        transform.position += transform.right * _currentSpeed * Time.deltaTime;
         SetOrbitPosition();
+
+        if (_useInertia)
+        {
+            _currentSpeed *= Decceleration;
+        }
     }
 
     private void CheckFlip()
