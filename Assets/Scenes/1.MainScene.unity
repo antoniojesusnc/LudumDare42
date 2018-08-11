@@ -376,6 +376,46 @@ Prefab:
       propertyPath: _planet
       value: 
       objectReference: {fileID: 947242074}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[0].ReproductionMinTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[0].ReproductionMaxTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[1].ReproductionMinTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[1].ReproductionMaxTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[2].ReproductionMinTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[2].ReproductionMaxTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[3].ReproductionMinTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114076006005966824, guid: fbf8ae1cda7bc9a488a97e65b096329f,
+        type: 2}
+      propertyPath: _animalPoblation.Array.data[3].ReproductionMaxTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbf8ae1cda7bc9a488a97e65b096329f, type: 2}
   m_IsPrefabParent: 0

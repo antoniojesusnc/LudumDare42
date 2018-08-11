@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4435172719744308}
   - component: {fileID: 114528551308997856}
+  - component: {fileID: 114341915804232922}
   - component: {fileID: 114614494030704738}
   - component: {fileID: 114361204321168958}
   m_Layer: 0
@@ -127,6 +128,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &114341915804232922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662630262716596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961e9f5d9536c1040bfbf26f6a5655fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forceMin: 7
+  _forceMax: 12
+  _durationMin: 0.2
+  _durationMax: 0.5
 --- !u!114 &114361204321168958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,8 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Momentum: {x: 0, y: 0}
-  _minTimeMovement: 1
-  _maxTimeMovement: 5
 --- !u!114 &114528551308997856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,10 +166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e50c8e4013c5c14cb8a491b16f25ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minSpeed: 0.2
+  _maxSpeed: 0.5
+  _minTimeChangeDirection: 1
+  _maxTimeChangeDirection: 5
   _typeAnimal: 1
   _input: {fileID: 114361204321168958}
   _orbitMovement: {fileID: 114614494030704738}
-  _speed: 0.5
 --- !u!114 &114614494030704738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _input: {fileID: 114361204321168958}
   _flipIfRight: 1
+  _useInertia: 0
 --- !u!212 &212355609663283178
 SpriteRenderer:
   m_ObjectHideFlags: 1

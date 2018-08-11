@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4859708582013096}
   - component: {fileID: 114990745819957078}
+  - component: {fileID: 114695824495695394}
   - component: {fileID: 114790343374520212}
   - component: {fileID: 114387556627602318}
   m_Layer: 0
@@ -129,8 +130,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Momentum: {x: 0, y: 0}
-  _minTimeMovement: 1
-  _maxTimeMovement: 5
+--- !u!114 &114695824495695394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769352302032124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961e9f5d9536c1040bfbf26f6a5655fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forceMin: 7
+  _forceMax: 12
+  _durationMin: 0.2
+  _durationMax: 0.5
 --- !u!114 &114790343374520212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 114387556627602318}
+  _flipIfRight: 0
+  _useInertia: 0
 --- !u!114 &114990745819957078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,10 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e50c8e4013c5c14cb8a491b16f25ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minSpeed: 0.2
+  _maxSpeed: 0.5
+  _minTimeChangeDirection: 1
+  _maxTimeChangeDirection: 5
   _typeAnimal: 0
   _input: {fileID: 114387556627602318}
   _orbitMovement: {fileID: 114790343374520212}
-  _speed: 0.5
 --- !u!212 &212234504820854710
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -190,7 +209,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -324149263
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}

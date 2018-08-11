@@ -5,25 +5,41 @@ using UnityEngine;
 
 public class AnimalController : MonoBehaviour {
 
+    [Header("Animal Speed")]
+    [SerializeField]
+    float _minSpeed;
+
+    [SerializeField]
+    float _maxSpeed;
+
+    [SerializeField]
+    float _minTimeChangeDirection;
+
+    [SerializeField]
+    float _maxTimeChangeDirection;
+
+    [Header("Others")]
+
     [SerializeField]
     ETypeAnimal _typeAnimal;
 
     [SerializeField]
-    InputController _input;
+    AnimalInput _input;
     [SerializeField]
     OrbitMovement _orbitMovement;
 
-    [SerializeField]
-    float _speed;
 
     void Start() {
         Init(_typeAnimal);
     }
 
     public void Init(ETypeAnimal typeAnimal) { 
-        _orbitMovement.Speed = _speed;
+        _orbitMovement.Speed = UnityEngine.Random.Range(_minSpeed, _maxSpeed);
 
         _typeAnimal = typeAnimal;
+
+        _input.MinTimeMovement = _minTimeChangeDirection;
+        _input.MaxTimeMovement = _maxTimeChangeDirection;
     }
     
     public ETypeAnimal GetAnimalType()

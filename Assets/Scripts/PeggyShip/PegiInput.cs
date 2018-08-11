@@ -33,7 +33,7 @@ public class PegiInput : InputController
         if (temp != 0)
         {
             Momentum += temp * Vector2.right;
-            IsPressingRight = Momentum.x > 0f ;
+            IsPressingRight = Momentum.x > 0f;
             IsPressingLeft = Momentum.x < 0f;
         }
 
@@ -50,13 +50,7 @@ public class PegiInput : InputController
         {
             Shooting = true;
         }
-             temp = Input.GetAxisRaw("HorizontalPegi");
-        if(temp != 0)
-        {
-            Debug.Log(temp);
-        }
     }
-
 
     private void ResetVars()
     {

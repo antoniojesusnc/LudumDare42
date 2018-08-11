@@ -6,9 +6,7 @@ using UnityEngine;
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
     public bool IsAbducting;
-
     public event DelegateVoidFunctionBoolParameter OnChangeAbductionState;
-
 
     [SerializeField]
     Transform _animalParent;
@@ -33,10 +31,44 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     void StartLevel()
     {
-        GemerateStartedAnimals();
+        GenerateStartedAnimals();
+
+        for (int i = _animalPoblation.Count - 1; i >= 0; i--)
+        {
+        StartCoroutine(CreateNewAnimalDelayed(_animalPoblation[i].AnimalType));
+        }
     }
 
-    private void GemerateStartedAnimals()
+    IEnumerator CreateNewAnimalDelayed(ETypeAnimal animal)
+    {
+        float timer = UnityEngine.Random.Range( GetPoblationInfo(animal).ReproductionMaxTime , GetPoblationInfo(animal).ReproductionMinTime);
+        Debug.Log(animal + ": " + timer);
+        yield return new WaitForSeconds(timer);
+
+        ReproduceOneAnimal(animal);
+
+        StartCoroutine(CreateNewAnimalDelayed(animal));
+    }
+
+    private void ReproduceOneAnimal(ETypeAnimal animal)
+    {
+        List<AnimalController> animals = new List<AnimalController>();
+        for (int i = _allAnimals.Count - 1; i >= 0; i--)
+        {
+            if(_allAnimals[i].GetAnimalType() == animal)
+                animals.Add(_allAnimals[i]);
+        }
+
+        int randomAnimal = UnityEngine.Random.Range(0, animals.Count);
+
+        var newAnimal = Instantiate<AnimalController>(animals[0], _animalParent);
+        newAnimal.Init(animal);
+        newAnimal.transform.position = animals[randomAnimal].transform.position;
+
+        _allAnimals.Add(newAnimal);
+    }
+
+    private void GenerateStartedAnimals()
     {
         AnimalController animal;
         int animalAmount;
@@ -57,7 +89,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         }
     }
 
-    internal void SetAbductionMode(bool setAbduction)
+    public void SetAbductionMode(bool setAbduction)
     {
         IsAbducting = setAbduction;
         if (OnChangeAbductionState != null)
@@ -86,16 +118,26 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         return null;
     }
 
+    AnimalPoblationInfo GetPoblationInfo(ETypeAnimal animalType)
+    {
+        for (int i = 0; i < _animalPoblation.Count; ++i)
+        {
+            if (_animalPoblation[i].AnimalType == animalType)
+            {
+                return _animalPoblation[i];
+            }
+        }
+        return null;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // Update Animals
         for (int i = 0; i < _allAnimals.Count; ++i)
         {
             _allAnimals[i].UpdateAnimal();
         }
 
-        // update Planet
         if (!IsAbducting)
         {
             _planet.UpdatePlanet();

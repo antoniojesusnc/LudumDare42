@@ -10,6 +10,7 @@ public class AnimalPoblationInfo  {
     public int MinDangerAmount;
     public int MaxDangerAmount;
     public int MaxAmount;
-    public float ReproductionRate;
+    public float ReproductionMinTime;
+    public float ReproductionMaxTime;
 
 }
