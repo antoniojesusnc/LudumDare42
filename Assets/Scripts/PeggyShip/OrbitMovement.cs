@@ -9,6 +9,16 @@ public class OrbitMovement : MonoBehaviour
     [SerializeField]
     InputController _input;
 
+    [SerializeField]
+    bool _flipIfRight;
+
+    [SerializeField]
+    bool _userInertia;
+    [SerializeField]
+    public float Acceleration { get; set; }
+    [SerializeField]
+    public float Decceleration { get; set; }
+
     float _speed;
     public float Speed
     {
@@ -37,8 +47,20 @@ public class OrbitMovement : MonoBehaviour
 
     void LateUpdate()
     {
+        if (_flipIfRight)
+            CheckFlip();
+
         transform.position += _input.Momentum.x * _currentSpeed * transform.right * Time.deltaTime;
         SetOrbitPosition();
+    }
+
+    private void CheckFlip()
+    {
+        foreach (var spriteRender in transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (_input.Momentum.x != 0)
+                spriteRender.flipX = _input.Momentum.x > 0;
+        }
     }
 
     private void SetOrbitPosition()

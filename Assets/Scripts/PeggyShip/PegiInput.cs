@@ -1,9 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PegiInput : InputController
 {
+    // key binding
+    public bool IsPressingRight { get; private set; }
+    public bool IsPressingLeft { get; private set; }
+
+
     public bool Shooting;
 
     OrbitMovement _orbit;
@@ -21,14 +27,14 @@ public class PegiInput : InputController
     }
     void Update()
     {
-        Momentum = new Vector2(0, 0);
-        Shooting = false;
+        ResetVars();
 
-
-        float temp = Input.GetAxis("Horizontal");
+        float temp = Input.GetAxisRaw("HorizontalPegi");
         if (temp != 0)
         {
             Momentum += temp * Vector2.right;
+            IsPressingRight = Momentum.x > 0f ;
+            IsPressingLeft = Momentum.x < 0f;
         }
 
         temp = Input.GetAxisRaw("Vertical");
@@ -44,5 +50,20 @@ public class PegiInput : InputController
         {
             Shooting = true;
         }
+             temp = Input.GetAxisRaw("HorizontalPegi");
+        if(temp != 0)
+        {
+            Debug.Log(temp);
+        }
+    }
+
+
+    private void ResetVars()
+    {
+        Momentum = new Vector2(0, 0);
+        Shooting = false;
+
+        IsPressingRight = false;
+        IsPressingLeft = false;
     }
 }

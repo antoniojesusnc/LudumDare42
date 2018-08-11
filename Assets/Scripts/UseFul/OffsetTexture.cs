@@ -10,12 +10,10 @@ public class OffsetTexture : MonoBehaviour {
 
     SpriteRenderer _renderer;
 
-    // Use this for initialization
     void Start () {
         _renderer = GetComponent<SpriteRenderer>();
     }
     
-    // Update is called once per frame
     void Update () {
         _currentValue += _speed * Time.deltaTime;
         _renderer.material.mainTextureOffset = Vector2.right * _currentValue;

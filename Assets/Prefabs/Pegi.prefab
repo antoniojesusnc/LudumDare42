@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114573960115805180}
   - component: {fileID: 114781200876916950}
   - component: {fileID: 114371259069852598}
+  - component: {fileID: 114777667258588650}
   m_Layer: 0
   m_Name: Pegi
   m_TagString: Player
@@ -38,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4397291130357016}
   - component: {fileID: 212493467224508780}
-  - component: {fileID: 95407044581641996}
+  - component: {fileID: 111167924771046196}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -73,23 +74,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95407044581641996
-Animator:
-  serializedVersion: 3
+--- !u!111 &111167924771046196
+Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1818452037485502}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1023301f71d8dfc418ea05a2862ca993, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 257bbb5b708c41343935a483dca62ebd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 257bbb5b708c41343935a483dca62ebd, type: 2}
+  - {fileID: 7400000, guid: 89dd93a24fd71b14aad76285e2336227, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114371259069852598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 114781200876916950}
+  _flipIfRight: 0
 --- !u!114 &114573960115805180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +117,20 @@ MonoBehaviour:
   _input: {fileID: 114781200876916950}
   _orbitMovement: {fileID: 114371259069852598}
   _speed: 2
-  _orbitCoolDown: 1
+  _orbitCoolDown: 0.2
+--- !u!114 &114777667258588650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399576689959876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64ed6c580599e34c9f00a24fdbeb4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _turnAnimation: {fileID: 7400000, guid: 89dd93a24fd71b14aad76285e2336227, type: 2}
+  _movingAnimation: {fileID: 7400000, guid: 257bbb5b708c41343935a483dca62ebd, type: 2}
 --- !u!114 &114781200876916950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,7 +176,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 673160659
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 45fc0eea4840fa54e8d749ca9479be68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

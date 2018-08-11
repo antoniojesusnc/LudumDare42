@@ -15,6 +15,10 @@ public class PegiController : MonoBehaviour
 
     [SerializeField]
     float _speed;
+    [SerializeField]
+    float _acceleration;
+    [SerializeField]
+    float _decceleration;
 
     [SerializeField]
     float _orbitCoolDown;
@@ -61,8 +65,6 @@ public class PegiController : MonoBehaviour
         _orbitMovement.Speed = _speed;
         _orbitMovement.CurrentOrbit = _currentOrbit;
     }
-
-
 
     void Update()
     {

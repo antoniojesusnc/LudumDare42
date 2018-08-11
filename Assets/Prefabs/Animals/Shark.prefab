@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 114655990948324390}
+  _flipIfRight: 1
 --- !u!114 &114891979798340006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,7 +201,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -324149263
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4379fa2609572a64e92d2d5dccd6ad40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
