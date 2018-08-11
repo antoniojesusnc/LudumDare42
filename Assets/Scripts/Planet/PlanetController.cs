@@ -19,6 +19,7 @@ public class PlanetController : MonoBehaviour {
     {
         switch (orbit)
         {
+            case 0: return _surface;
             case 1: return _orbit01;
             case 2: return _orbit02;
             case 3: return _orbit03;

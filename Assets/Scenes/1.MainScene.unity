@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 2023013008}
   - component: {fileID: 2023013009}
   - component: {fileID: 2023013010}
+  - component: {fileID: 2023013011}
   m_Layer: 0
   m_Name: Pegi
   m_TagString: Player
@@ -434,3 +435,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Momentum: {x: 0, y: 0}
+--- !u!114 &2023013011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023013007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04bfb80df1c6de46ba13f374469ba0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _input: {fileID: 2023013010}

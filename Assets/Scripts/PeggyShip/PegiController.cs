@@ -36,7 +36,6 @@ public class PegiController : MonoBehaviour {
         _orbitTimeStamp -= Time.deltaTime;
         if (_input.Momentum.y != 0 && _orbitTimeStamp <= 0)
         {
-
             int newOrbit = _currentOrbit + (int)_input.Momentum.y;
             newOrbit = Mathf.Clamp(newOrbit, 1, 3);
             if(newOrbit != _currentOrbit)
