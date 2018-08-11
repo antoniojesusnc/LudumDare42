@@ -13,13 +13,17 @@ public class AnimalInput : InputController
     float _timeStamp;
     Vector2 _direction;
 
+    bool _beingAbducted;
+
     public void Update()
     {
+        Momentum = new Vector2();
+
         _timeStamp -= Time.deltaTime;
         if (_timeStamp <= 0)
         {
             _timeStamp = Random.Range(_minTimeMovement, _maxTimeMovement);
-            _direction = Vector2.right * (Random.Range(0.0f, 1.0f) < 0.5 ? -1 : 1);
+            _direction = Vector2.right * (Random.value < 0.5 ? -1 : 1);
         }
         Momentum = _direction;
     }
