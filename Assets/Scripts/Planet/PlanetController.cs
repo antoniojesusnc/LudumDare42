@@ -13,7 +13,8 @@ public class PlanetController : MonoBehaviour {
     float _orbit02;
     [SerializeField]
     float _orbit03;
-    
+	[SerializeField]
+	float _angularVelocity;
 
     public float GetOrbitPosition(int orbit)
     {
@@ -26,6 +27,11 @@ public class PlanetController : MonoBehaviour {
         }
         return _orbit01;
     }
+
+	public void Update()
+	{
+		transform.rotation = Quaternion.Euler (0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
+	}
 
     private void OnDrawGizmos()
     {
