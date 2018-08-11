@@ -35,8 +35,22 @@ public class PegiController : MonoBehaviour
         }
     }
 
+    bool _canMove = true;
+    public bool CanMove
+    {
+        get
+        {
+            return _canMove && !LevelManager.Instance.IsAbducting;
+        }
+        set
+        {
+            _canMove = value;
+        }
+    }
+
     float _orbitTimeStamp;
     float _currentSpeed;
+    bool _animChangeOrbit;
 
     PlanetController _planet;
 
@@ -52,7 +66,7 @@ public class PegiController : MonoBehaviour
 
     void Update()
     {
-        if (!LevelManager.Instance.IsAbducting)
+        if (CanMove)
         {
             SetOrbitPosition();
             CheckShoot();
@@ -112,7 +126,27 @@ public class PegiController : MonoBehaviour
 
                 _currentOrbit = newOrbit;
                 _orbitMovement.CurrentOrbit = _currentOrbit;
+
+                if (!IsInSpace)
+                {
+                    StartAnimOrbitPosition();
+
+                }
             }
         }
+    }
+
+    void StartAnimOrbitPosition()
+    {
+        float animTime = _orbitTimeStamp;
+
+        LeanTween.move(gameObject, transform.up.normalized * _planet.GetOrbitPosition(_currentOrbit), animTime);
+        _orbitMovement.AnimChangeOrbit = true;
+        LeanTween.delayedCall(animTime, FinishAnimOrbitPosition);
+    }
+
+    void FinishAnimOrbitPosition()
+    {
+        _orbitMovement.AnimChangeOrbit = false;
     }
 }

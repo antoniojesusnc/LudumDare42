@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1608543627465046}
+  m_IsPrefabParent: 1
+--- !u!1 &1608543627465046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4125046476862878}
+  - component: {fileID: 114076006005966824}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4125046476862878
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608543627465046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.44295812, y: 5.1768427, z: 0.20658661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114076006005966824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608543627465046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71333fb3dbc1b1478e1acd49869750a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsAbducting: 0
+  _animalParent: {fileID: 0}
+  _animalPoblation:
+  - AnimalType: 0
+    MinAmount: 5
+    MinDangerAmount: 10
+    MaxDangerAmount: 15
+    MaxAmount: 20
+    ReproductionRate: 0
+  - AnimalType: 1
+    MinAmount: 5
+    MinDangerAmount: 10
+    MaxDangerAmount: 15
+    MaxAmount: 20
+    ReproductionRate: 0
+  - AnimalType: 2
+    MinAmount: 5
+    MinDangerAmount: 10
+    MaxDangerAmount: 15
+    MaxAmount: 20
+    ReproductionRate: 0
+  - AnimalType: 3
+    MinAmount: 5
+    MinDangerAmount: 10
+    MaxDangerAmount: 15
+    MaxAmount: 20
+    ReproductionRate: 0
+  _animalPrefabs:
+  - {fileID: 114990745819957078, guid: bc8fd17dcee77c64ea83134d5b3295ba, type: 2}
+  - {fileID: 114528551308997856, guid: 7bc291976d05019489b4d9390dc66caa, type: 2}
+  - {fileID: 114891979798340006, guid: 6e77a0d0f96bb4c4e98de29ef00b3219, type: 2}
+  - {fileID: 114990745819957078, guid: f13ce3814d31c744485a1f2e488500a6, type: 2}
+  _allAnimals: []
+  _planet: {fileID: 0}

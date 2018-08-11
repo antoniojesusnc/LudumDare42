@@ -7,6 +7,7 @@ public enum ETypeAnimal
     Cow,
     Scorpion,
     Shark,
+    Bear,
 
 
     Size,

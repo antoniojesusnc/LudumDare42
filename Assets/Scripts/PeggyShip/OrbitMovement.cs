@@ -27,6 +27,7 @@ public class OrbitMovement : MonoBehaviour
     public int CurrentOrbit { get; set; }
 
     PlanetController _planet;
+    public bool AnimChangeOrbit { get; set; }
 
     void Start()
     {
@@ -42,9 +43,13 @@ public class OrbitMovement : MonoBehaviour
 
     private void SetOrbitPosition()
     {
-        float orbitPosition = _planet.GetOrbitPosition(CurrentOrbit);
-        Vector3 dirToPlanet = (transform.position - _planet.transform.position).normalized;
-        transform.position = dirToPlanet * orbitPosition;
-        transform.up = dirToPlanet;
+        if (!AnimChangeOrbit)
+        {
+            float orbitPosition = _planet.GetOrbitPosition(CurrentOrbit);
+            Vector3 dirToPlanet = (transform.position - _planet.transform.position).normalized;
+
+            transform.position = dirToPlanet * orbitPosition;
+            transform.up = dirToPlanet;
+        }
     }
 }
