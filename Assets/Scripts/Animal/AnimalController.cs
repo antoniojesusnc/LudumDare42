@@ -5,6 +5,9 @@ using UnityEngine;
 public class AnimalController : MonoBehaviour {
 
     [SerializeField]
+    ETypeAnimal _typeAnimal;
+
+    [SerializeField]
     InputController _input;
     [SerializeField]
     OrbitMovement _orbitMovement;
@@ -12,15 +15,18 @@ public class AnimalController : MonoBehaviour {
     [SerializeField]
     float _speed;
 
-   
+    void Start() {
+        Init(_typeAnimal);
+    }
 
-    void Start () {
+    public void Init(ETypeAnimal typeAnimal) { 
         _orbitMovement.Speed = _speed;
 
+        _typeAnimal = typeAnimal;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public ETypeAnimal GetAnimalType()
+    {
+        return _typeAnimal;
+    }
 }

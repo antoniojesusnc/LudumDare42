@@ -6,7 +6,7 @@ using UnityEngine;
 public class PegiController : MonoBehaviour {
 
     [SerializeField]
-    InputController _input;
+	PegiInput _input;
 
     [SerializeField]
     OrbitMovement _orbitMovement;
@@ -32,7 +32,26 @@ public class PegiController : MonoBehaviour {
 	
 	void Update () {
         SetOrbitPosition();
+		CheckShoot();
     }
+
+	private void CheckShoot()
+	{
+		if (_input.Shooting) 
+		{
+			//Debug.Log ("HI");
+			
+			RaycastHit HitInfo = new RaycastHit();
+            Vector2 dir = (Vector2)(_planet.transform.position - transform.position).normalized;
+            ContactFilter2D contact2D = new ContactFilter2D();
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
+            if(hit.collider != null)
+            {
+                Debug.Log(hit.collider.name);
+
+            }
+		}
+	}
 
     private void SetOrbitPosition()
     {

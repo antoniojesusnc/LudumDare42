@@ -42,3 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World
+    uniqueID: 3342212849
+    locked: 0
+  - name: Animal
+    uniqueID: 3970818033
+    locked: 0
+  - name: Pegi
+    uniqueID: 673160659
+    locked: 0
