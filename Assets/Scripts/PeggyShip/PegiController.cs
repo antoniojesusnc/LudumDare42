@@ -39,6 +39,14 @@ public class PegiController : MonoBehaviour
         }
     }
 
+    public bool IsInBotOrbit
+    {
+        get
+        {
+            return _currentOrbit <= 1;
+        }
+    }
+
     bool _canMove = true;
     public bool CanMove
     {
@@ -55,6 +63,8 @@ public class PegiController : MonoBehaviour
     float _orbitTimeStamp;
     float _currentSpeed;
 
+    AnimalController _animalBeingAbduced;
+
     PlanetController _planet;
 
     void Start()
@@ -69,6 +79,7 @@ public class PegiController : MonoBehaviour
 
     void Update()
     {
+
         if (CanMove)
         {
             SetOrbitPosition();
@@ -86,19 +97,11 @@ public class PegiController : MonoBehaviour
 
     }
 
-    private void CheckFinishAbduction()
-    {
-        if (_input.Shooting)
-        {
-            LevelManager.Instance.SetAbductionMode(false);
-        }
-
-
-    }
+    
 
     private void CheckShoot()
     {
-        if (_input.Shooting)
+        if(IsInBotOrbit && _input.Shooting)
         {
             //Debug.Log ("HI");
             RaycastHit HitInfo = new RaycastHit();
@@ -107,15 +110,25 @@ public class PegiController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
             if (hit.collider != null)
             {
-                StartAbductionMode();
+                StartAbductionMode(hit.collider.GetComponentInParent<AnimalController>());
             }
         }
     }
 
-    private void StartAbductionMode()
+    private void StartAbductionMode(AnimalController animalBeingAbduced)
     {
         LevelManager.Instance.SetAbductionMode(true);
+        _animalBeingAbduced = animalBeingAbduced;
+        _animalBeingAbduced.StartAbduction() ;
+    }
 
+    private void CheckFinishAbduction()
+    {
+        if (_input.Shooting)
+        {
+            LevelManager.Instance.SetAbductionMode(false);
+            _animalBeingAbduced.FinishAbduction();
+        }
     }
 
     private void SetOrbitPosition()

@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     Vector3 _offsetPegiHigh;
     [SerializeField]
+    Vector3 _offsetAbducing;
+    [SerializeField]
     [Range(0.01f, 1f)]
     float _rateNormal;
     [SerializeField]
@@ -21,8 +23,11 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float _zoomNormal;
     [SerializeField]
-    float _zoomHigh;
-
+    float _zoomSpace;
+    [SerializeField]
+    float _zoomAbducing;
+    [SerializeField]
+    float _abducingAnimTime;
 
 
     Vector3 _currentOffset;
@@ -44,13 +49,46 @@ public class CameraController : MonoBehaviour
         _finalPos = new Vector3();
 
         _pegi.OnChangeOrbit += OnChangeOrbit;
+        LevelManager.Instance.OnChangeAbductionState += OnChangeAbducingState;
+    }
+
+    private void OnChangeAbducingState(bool abducing)
+    {
+        if (abducing)
+        {
+            StartCoroutine(SetCameraZoom(_zoomAbducing));
+        }
+        else
+        {
+            StartCoroutine(SetCameraZoom(_zoomNormal));
+        }
+    }
+
+    private IEnumerator SetCameraZoom(float zoom)
+    {
+        float originalSize = _camera.orthographicSize;
+
+        float timeStamp = 0;
+        while(timeStamp < _abducingAnimTime)
+        {
+            Debug.Log(timeStamp +"<"+ _abducingAnimTime);
+
+            _camera.orthographicSize = Mathf.Lerp( originalSize, zoom, timeStamp / _abducingAnimTime);
+            yield return 0;
+            timeStamp += Time.deltaTime;
+            Debug.Log(timeStamp);
+        }
+        Debug.Log(timeStamp);
+
+
+        _camera.orthographicSize = zoom;
     }
 
     private void OnChangeOrbit(int newOrbit)
     {
         if (newOrbit > 3)
         {
-            _camera.orthographicSize = _zoomHigh;
+            _camera.orthographicSize = _zoomSpace;
             _pegiGraphic.SetActive(true);
         }
         else
@@ -69,7 +107,8 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        _currentOffset = _pegi.IsInSpace ? _offsetPegiHigh : _offsetPegi;
+        _currentOffset = LevelManager.Instance.IsAbducting? _offsetAbducing:
+            (_pegi.IsInSpace ? _offsetPegiHigh : _offsetPegi);
         _currentRate = _pegi.IsInSpace ? _rateHigh : _rateNormal;
 
         _finalPos = _pegi.transform.right * _currentOffset.x + _pegi.transform.up * _currentOffset.y;

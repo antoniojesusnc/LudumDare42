@@ -11,11 +11,18 @@ public class AnimalInput : InputController
     float _timeStamp;
     Vector2 _direction;
 
-    bool _beingAbducted;
+    AnimalController _animal;
+
+    private void Start()
+    {
+        _animal = GetComponent<AnimalController>();
+    }
 
     public void Update()
     {
         Momentum = new Vector2();
+        if (_animal.BeingAbduced)
+            return;
 
         _timeStamp -= Time.deltaTime;
         if (_timeStamp <= 0)

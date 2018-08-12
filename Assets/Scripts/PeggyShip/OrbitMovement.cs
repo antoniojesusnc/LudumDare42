@@ -38,13 +38,24 @@ public class OrbitMovement : MonoBehaviour
     PlanetController _planet;
     public bool AnimChangeOrbit { get; set; }
 
+    public bool IsDisable { get; set; }
+
     void Start()
     {
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
+        LevelManager.Instance.OnChangeAbductionState += OnChangeAbductionState;
+    }
+
+    private void OnChangeAbductionState(bool enabled)
+    {
+        _currentSpeed = 0;
     }
 
     void LateUpdate()
     {
+        if (IsDisable)
+            return;
+
         if (_flipIfRight)
             CheckFlip();
 

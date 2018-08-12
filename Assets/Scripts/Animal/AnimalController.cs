@@ -25,12 +25,15 @@ public class AnimalController : MonoBehaviour {
 
     [SerializeField]
     AnimalInput _input;
+
     [SerializeField]
     OrbitMovement _orbitMovement;
 
+    public bool BeingAbduced { get; set; }
 
     void Start() {
         Init(_typeAnimal);
+
     }
 
     public void Init(ETypeAnimal typeAnimal) { 
@@ -47,8 +50,20 @@ public class AnimalController : MonoBehaviour {
         return _typeAnimal;
     }
 
-    internal void UpdateAnimal()
+    public void UpdateAnimal()
     {
         
+    }
+
+    public void StartAbduction()
+    {
+        BeingAbduced = true;
+        _orbitMovement.enabled = false;
+    }
+
+    public void FinishAbduction()
+    {
+        BeingAbduced = false;
+        _orbitMovement.enabled = true;
     }
 }

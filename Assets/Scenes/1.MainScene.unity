@@ -1211,6 +1211,26 @@ Prefab:
       propertyPath: orthographic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114527848889040044, guid: c119d209b435f784f959c13fa9effd6c,
+        type: 2}
+      propertyPath: _zoomSpace
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114527848889040044, guid: c119d209b435f784f959c13fa9effd6c,
+        type: 2}
+      propertyPath: _zoomAbducing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114527848889040044, guid: c119d209b435f784f959c13fa9effd6c,
+        type: 2}
+      propertyPath: _abducingAnimTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114527848889040044, guid: c119d209b435f784f959c13fa9effd6c,
+        type: 2}
+      propertyPath: _offsetAbducing.y
+      value: 7.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c119d209b435f784f959c13fa9effd6c, type: 2}
   m_IsPrefabParent: 0
@@ -1313,6 +1333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _beamObj: {fileID: 261234224}
+  _originalPos: {x: -0.084, y: -0.723, z: 0}
+  _rightPos: {x: 0.01, y: -0.723, z: 0}
 --- !u!1 &2085203925
 GameObject:
   m_ObjectHideFlags: 0

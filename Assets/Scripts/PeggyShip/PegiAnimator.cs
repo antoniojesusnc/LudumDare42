@@ -20,6 +20,9 @@ public class PegiAnimator : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Instance.IsAbducting)
+            return;
+
         _animator.SetBool(AnimKeyRight, _input.IsPressingRight);
         _animator.SetBool(AnimKeyLeft, _input.IsPressingLeft);
         _animator.SetBool(AnimKeyPressNothing, !_input.IsPressingRight && !_input.IsPressingLeft);
