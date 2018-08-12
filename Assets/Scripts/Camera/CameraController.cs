@@ -75,8 +75,6 @@ public class CameraController : MonoBehaviour
             yield return 0;
             timeStamp += Time.deltaTime;
         }
-        Debug.Log(timeStamp);
-
 
         _camera.orthographicSize = zoom;
     }

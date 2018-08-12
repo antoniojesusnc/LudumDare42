@@ -46,7 +46,7 @@ public class GUITopBar : MonoBehaviour
         for (int i = _level.AnimalPoblation.Count - 1; i >= 0; i--)
         {
             _animalPoblationInfo.Add(_level.AnimalPoblation[i].AnimalType, _level.AnimalPoblation[i]);
-            _lastValue.Add(_level.AnimalPoblation[i].AnimalType, _level.AnimalAmount[_level.AnimalPoblation[i].AnimalType]);
+            _lastValue.Add(_level.AnimalPoblation[i].AnimalType, 0);
         }
 
         _animalImages = new Dictionary<ETypeAnimal, RectTransform>();
@@ -54,6 +54,8 @@ public class GUITopBar : MonoBehaviour
         _animalImages.Add(ETypeAnimal.Shark, _sharkImage);
         _animalImages.Add(ETypeAnimal.Bear, _bearImage);
         _animalImages.Add(ETypeAnimal.Camel, _camelImage);
+
+        UpdateBar(false);
     }
 
     private void Update()
@@ -61,7 +63,7 @@ public class GUITopBar : MonoBehaviour
         UpdateBar();
     }
 
-    private void UpdateBar()
+    private void UpdateBar(bool doAnim = true)
     {
         bool lowArea;
         bool middleArea;
@@ -86,15 +88,15 @@ public class GUITopBar : MonoBehaviour
                 highArea = true;
 
             if (lowArea)
-                SetImageInLine(_lowLimit, _lowDangerLimit, animalInfo.MinAmount, animalInfo.MinDangerAmount, _level.AnimalAmount[animal], animal);
+                SetImageInLine(_lowLimit, _lowDangerLimit, animalInfo.MinAmount, animalInfo.MinDangerAmount, _level.AnimalAmount[animal], animal, doAnim);
             else if (middleArea)
-                SetImageInLine(_lowDangerLimit, _highDangerLimit, animalInfo.MinDangerAmount, animalInfo.MaxDangerAmount, _level.AnimalAmount[animal], animal);
+                SetImageInLine(_lowDangerLimit, _highDangerLimit, animalInfo.MinDangerAmount, animalInfo.MaxDangerAmount, _level.AnimalAmount[animal], animal, doAnim);
             else
-                SetImageInLine(_highDangerLimit, _highLimit, animalInfo.MaxDangerAmount, animalInfo.MaxAmount, _level.AnimalAmount[animal], animal);
+                SetImageInLine(_highDangerLimit, _highLimit, animalInfo.MaxDangerAmount, animalInfo.MaxAmount, _level.AnimalAmount[animal], animal, doAnim);
         }
     }
 
-    private void SetImageInLine(RectTransform minLimit, RectTransform maxLimit, int minAmount, int maxAmount, int currentAmont, ETypeAnimal animal)
+    private void SetImageInLine(RectTransform minLimit, RectTransform maxLimit, int minAmount, int maxAmount, int currentAmont, ETypeAnimal animal, bool doAnim = true)
     {
         float factor = (float)(currentAmont - minAmount) / (float)(maxAmount - minAmount);
         float distance = maxLimit.anchoredPosition.x - minLimit.anchoredPosition.x;
@@ -104,7 +106,11 @@ public class GUITopBar : MonoBehaviour
         if(_lastValue[animal] != currentAmont) 
         {
             Vector2 finalPos = new Vector2(minLimit.anchoredPosition.x + distanceFromOrigin, _animalImages[animal].anchoredPosition.y);
-            LeanTween.move(_animalImages[animal], finalPos, _animTime);
+            if (doAnim)
+                LeanTween.move(_animalImages[animal], finalPos, _animTime);
+            else
+                _animalImages[animal].anchoredPosition = finalPos;
+
             _lastValue[animal] = currentAmont;
         }
         //rectTransform.anchoredPosition = new Vector2(minLimit.anchoredPosition.x + distanceFromOrigin, rectTransform.anchoredPosition.y);
