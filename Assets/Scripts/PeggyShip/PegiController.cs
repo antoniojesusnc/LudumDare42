@@ -107,10 +107,15 @@ public class PegiController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
             if (hit.collider != null)
             {
-                LevelManager.Instance.SetAbductionMode(true);
-
+                StartAbductionMode();
             }
         }
+    }
+
+    private void StartAbductionMode()
+    {
+        LevelManager.Instance.SetAbductionMode(true);
+
     }
 
     private void SetOrbitPosition()

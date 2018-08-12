@@ -15,7 +15,7 @@ public class PegiAnimator : MonoBehaviour
     void Start()
     {
         _input = GetComponentInChildren<PegiInput>();
-        _animator = GetComponentInChildren<Animator>();
+        _animator = transform.Find("Graphic").GetComponentInChildren<Animator>();
     }
 
     void Update()
