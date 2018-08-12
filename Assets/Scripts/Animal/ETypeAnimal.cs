@@ -5,7 +5,7 @@ using UnityEngine;
 public enum ETypeAnimal
 {
     Cow,
-    Scorpion,
+    Camel,
     Shark,
     Bear,
 

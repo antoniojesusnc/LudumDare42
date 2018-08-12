@@ -13,8 +13,15 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     [SerializeField]
     List<AnimalPoblationInfo> _animalPoblation;
+    public List<AnimalPoblationInfo> AnimalPoblation
+    {
+        get
+        {
+            return _animalPoblation;
+        }
+    }
 
-    public Dictionary<ETypeAnimal, int> _animalAmount;
+    public Dictionary<ETypeAnimal, int> AnimalAmount { get; private set; }
 
     AnimalManager _animalManager;
 
@@ -25,7 +32,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     List<AnimalController> _allAnimals = new List<AnimalController>();
     [SerializeField]
     PlanetController _planet;
-    
+
     void Start()
     {
         StartLevel();
@@ -33,18 +40,18 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     void StartLevel()
     {
-        _animalAmount = new Dictionary<ETypeAnimal, int>();
+        AnimalAmount = new Dictionary<ETypeAnimal, int>();
         GenerateStartedAnimals();
 
         for (int i = _animalPoblation.Count - 1; i >= 0; i--)
         {
-        StartCoroutine(CreateNewAnimalDelayed(_animalPoblation[i].AnimalType));
+            StartCoroutine(CreateNewAnimalDelayed(_animalPoblation[i].AnimalType));
         }
     }
 
     IEnumerator CreateNewAnimalDelayed(ETypeAnimal animal)
     {
-        float timer = UnityEngine.Random.Range( GetPoblationInfo(animal).ReproductionMaxTime , GetPoblationInfo(animal).ReproductionMinTime);
+        float timer = UnityEngine.Random.Range(GetPoblationInfo(animal).ReproductionMaxTime, GetPoblationInfo(animal).ReproductionMinTime);
         //Debug.Log(animal + ": " + timer);
         yield return new WaitForSeconds(timer);
 
@@ -58,7 +65,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         List<AnimalController> animals = new List<AnimalController>();
         for (int i = _allAnimals.Count - 1; i >= 0; i--)
         {
-            if(_allAnimals[i].GetAnimalType() == animal)
+            if (_allAnimals[i].GetAnimalType() == animal)
                 animals.Add(_allAnimals[i]);
         }
 
@@ -70,7 +77,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
         _allAnimals.Add(newAnimal);
 
-        --_animalAmount[animal];
+        ++AnimalAmount[animal];
     }
 
     private void GenerateStartedAnimals()
@@ -87,7 +94,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
             }
 
             animalAmount = Mathf.CeilToInt((_animalPoblation[i].MaxDangerAmount + _animalPoblation[i].MinDangerAmount) * 0.5f);
-            _animalAmount.Add(_animalPoblation[i].AnimalType, animalAmount);
+            AnimalAmount.Add(_animalPoblation[i].AnimalType, animalAmount);
             for (int j = 0; j < animalAmount; ++j)
             {
                 GenerateAnimal(animal);

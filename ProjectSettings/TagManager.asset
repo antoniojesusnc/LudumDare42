@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - Space
-  - 
-  - 
+  - Player
+  - World
   - 
   - 
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: Pegi
     uniqueID: 673160659
+    locked: 0
+  - name: Cloud
+    uniqueID: 4016548101
     locked: 0

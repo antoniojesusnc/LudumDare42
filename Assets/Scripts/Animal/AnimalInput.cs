@@ -21,7 +21,7 @@ public class AnimalInput : InputController
     public void Update()
     {
         Momentum = new Vector2();
-        if (_animal.BeingAbduced)
+        if (_animal != null && _animal.BeingAbduced)
             return;
 
         _timeStamp -= Time.deltaTime;

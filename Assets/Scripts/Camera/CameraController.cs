@@ -71,12 +71,9 @@ public class CameraController : MonoBehaviour
         float timeStamp = 0;
         while(timeStamp < _abducingAnimTime)
         {
-            Debug.Log(timeStamp +"<"+ _abducingAnimTime);
-
             _camera.orthographicSize = Mathf.Lerp( originalSize, zoom, timeStamp / _abducingAnimTime);
             yield return 0;
             timeStamp += Time.deltaTime;
-            Debug.Log(timeStamp);
         }
         Debug.Log(timeStamp);
 

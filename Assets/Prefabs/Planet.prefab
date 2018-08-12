@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4077426614902126}
   - component: {fileID: 114647076535934056}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Planet
   m_TagString: Planet
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4875789744983422}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Animals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,8 +52,24 @@ GameObject:
   - component: {fileID: 4649693728534898}
   - component: {fileID: 212452235559389176}
   - component: {fileID: 95284853263249156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Graphic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1845656422219880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4152923536162642}
+  - component: {fileID: 114473127141943000}
+  m_Layer: 10
+  m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,9 +86,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4649693728534898}
+  - {fileID: 4152923536162642}
   - {fileID: 4875789744983422}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4152923536162642
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845656422219880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4077426614902126}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4649693728534898
 Transform:
@@ -98,7 +128,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4077426614902126}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95284853263249156
 Animator:
@@ -109,7 +139,7 @@ Animator:
   m_GameObject: {fileID: 1499226909545028}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5c64d04979c20e34589ad5c20ba2b0bc, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,6 +147,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114473127141943000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845656422219880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c7b956d11d40554aad2c99000661c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _simultaneousClouds: 0
+  _minTimeNewCloud: 0
+  _maxTimeNewCloud: 0
+  _minTimeNewCloudNormal: 0
+  _maxTimeNewCloudNormal: 0
+  _minxTimeNewCloudAngry: 0
+  _maxTimeNewCloudAngry: 0
+  _minSpeed: 0
+  _maxSpeed: 0
+  _cloudPrefab: {fileID: 0}
+  _alphaDestroyTime: 0
 --- !u!114 &114647076535934056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,8 +217,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -952754447
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb5981bb30850cd4dbf019d4839ef314, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
