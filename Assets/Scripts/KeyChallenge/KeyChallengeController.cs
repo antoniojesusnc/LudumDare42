@@ -58,6 +58,17 @@ public class KeyChallengeController : MonoBehaviour
     [SerializeField]
     Transform _keyLeft;
 
+    [Header("Keys Reference")]
+
+    [SerializeField]
+    SpriteRenderer _keyRefDown;
+    [SerializeField]
+    SpriteRenderer _keyRefUp;
+    [SerializeField]
+    SpriteRenderer _keyRefRight;
+    [SerializeField]
+    SpriteRenderer _keyRefLeft;
+
     [Header("Others")]
     [SerializeField]
     PegiInput _input;
@@ -159,6 +170,8 @@ public class KeyChallengeController : MonoBehaviour
         if (key == EKeys.Size)
             return;
 
+        ShowPress(key);
+
         var activesInLine = _keyActives[key];
         if (activesInLine.Count <= 0)
             return;
@@ -174,9 +187,42 @@ public class KeyChallengeController : MonoBehaviour
         }
     }
 
+    private void ShowPress(EKeys key)
+    {
+        GameObject button = null;
+        switch (key)
+        {
+            case EKeys.Left:
+                button = _keyRefLeft.gameObject;
+                break;
+            case EKeys.Up:
+                button = _keyRefUp.gameObject;
+                break;
+            case EKeys.Down:
+                button = _keyRefDown.gameObject;
+                break;
+            case EKeys.Right:
+                button = _keyRefRight.gameObject;
+                break;
+        }
+
+        if (button == null)
+            return;
+
+        LeanTween.scale(button, Vector3.one * 1.1f, 0.017f).setLoopPingPong(1);
+        LeanTween.alpha(button, 1, 0.017f).setLoopPingPong(1);
+    }
+
     private void CheckCorrectInput(KeyChallengeInfo keyChallengeInfo)
     {
-        
+        float timeDiference = keyChallengeInfo.time - _currentTime;
+
+        if (timeDiference > _timeToSuccessPressed || timeDiference < -_timeToSuccessPressed)
+            FailKey(keyChallengeInfo);
+        else if (timeDiference < _timeToPerfectPressed && timeDiference > -_timeToPerfectPressed)
+            SuccessKey(keyChallengeInfo, true);
+        else
+            SuccessKey(keyChallengeInfo, false);
     }
 
     private IEnumerator ShowNextKeyCo()
@@ -193,6 +239,8 @@ public class KeyChallengeController : MonoBehaviour
         float timeStamp = 0;
 
         Transform obj = CreateKey(info.key);
+        info.ObjKey = obj;
+
         Vector2 position;
         while (timeStamp < (info.time - startTime))
         {
@@ -218,8 +266,6 @@ public class KeyChallengeController : MonoBehaviour
         }
         return null;
     }
-
-
 
     private void GenerateInitialValues()
     {
@@ -268,5 +314,26 @@ public class KeyChallengeController : MonoBehaviour
         if (_input.MomentumDown.y > 0)
             return EKeys.Up;
         return EKeys.Size;
+    }
+    void SuccessKey(KeyChallengeInfo keyChallengeInfo, bool isPerfect = false)
+    {
+        keyChallengeInfo.Success = true;
+        if (isPerfect)
+        {
+            keyChallengeInfo.ObjKey.GetComponentInChildren<SpriteRenderer>().color = new Color(0.43f, 1, 0.43f);
+            _secondsToFinish -= _timeToTakeIfPerfect;
+        }
+
+        keyChallengeInfo.ObjKey.transform.localScale = Vector3.one * 1.1f;
+        Debug.Log("SuccessKey " + isPerfect);
+    }
+
+    void FailKey(KeyChallengeInfo keyChallengeInfo)
+    {
+        keyChallengeInfo.ObjKey.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 0.4f, 0.4f);
+        _secondsToFinish += _timeToAddIfFail;
+        keyChallengeInfo.Failed = true;
+
+        Debug.Log("FailKey ");
     }
 }

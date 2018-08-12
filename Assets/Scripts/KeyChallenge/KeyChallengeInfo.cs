@@ -8,6 +8,8 @@ public class KeyChallengeInfo  {
     public EKeys key;
     public float time;
     public bool Failed;
+    public bool Success;
+    public Transform ObjKey;
 
     public KeyChallengeInfo(EKeys newKey, float newTime)
     {
