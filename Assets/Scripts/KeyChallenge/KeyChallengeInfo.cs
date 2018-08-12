@@ -2,7 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyChallengeInfo : MonoBehaviour {
+[System.Serializable]
+public class KeyChallengeInfo  {
 
-    public int NumberKeys;
+    public EKeys key;
+    public float time;
+    public bool Failed;
+
+    public KeyChallengeInfo(EKeys newKey, float newTime)
+    {
+        key = newKey;
+        time = newTime;
+    }
 }

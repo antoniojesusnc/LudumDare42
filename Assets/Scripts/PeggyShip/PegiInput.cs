@@ -50,14 +50,34 @@ public class PegiInput : InputController
         {
             Shooting = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            MomentumDown.Set(-1, MomentumDown.y);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            MomentumDown.Set(1, MomentumDown.y);
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            MomentumDown.Set(MomentumDown.x, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            MomentumDown.Set(MomentumDown.x, -1);
+        }
     }
 
     private void ResetVars()
     {
         Momentum = new Vector2(0, 0);
+        MomentumDown = new Vector2(0, 0);
+
         Shooting = false;
 
         IsPressingRight = false;
         IsPressingLeft = false;
     }
 }
+

@@ -6,7 +6,9 @@ public class InputController : MonoBehaviour {
 
     public Vector2 Momentum;
 
-    
+    public Vector2 MomentumDown;
 
-   
+
+
+
 }

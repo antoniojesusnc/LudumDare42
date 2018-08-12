@@ -75,7 +75,7 @@ public class GUITopBar : MonoBehaviour
         {
             animal = (ETypeAnimal)i;
 
-            Debug.Log(animal + ": " + _level.AnimalAmount[animal]);
+            //Debug.Log(animal + ": " + _level.AnimalAmount[animal]);
             animalInfo = _animalPoblationInfo[animal];
 
             lowArea = middleArea = highArea = false;
