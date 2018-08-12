@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: cc2b6830226b599418b3754228daa2bf
-timeCreated: 1534037048
+guid: 47ffcca5d752389408deaa072a65a9fe
+timeCreated: 1534038037
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Barra_0
-    21300002: Barra_1
-    21300004: Barra_2
-    21300006: Barra_3
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -44,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -93,63 +89,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Barra_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 1920
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Barra_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 1920
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Barra_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 1920
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Barra_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
+    sprites: []
     outline: []
     physicsShape: []
   spritePackingTag: 
