@@ -14,6 +14,7 @@ public class PegiInput : InputController
 
     OrbitMovement _orbit;
     PegiController _pegi;
+    float _temp;
 
     private void Start()
     {
@@ -31,21 +32,24 @@ public class PegiInput : InputController
     {
         ResetVars();
 
-        if (_pegi.IsInShock)
+        if (_pegi.IsInShock )
             return;
 
-        float temp = Input.GetAxisRaw("HorizontalPegi");
-        if (temp != 0)
+        if (!_pegi.IsInSpace)
         {
-            Momentum += temp * Vector2.right;
-            IsPressingRight = Momentum.x > 0f;
-            IsPressingLeft = Momentum.x < 0f;
+            _temp = Input.GetAxisRaw("HorizontalPegi");
+            if (_temp != 0)
+            {
+                Momentum += _temp * Vector2.right;
+                IsPressingRight = Momentum.x > 0f;
+                IsPressingLeft = Momentum.x < 0f;
+            }
         }
 
-        temp = Input.GetAxisRaw("Vertical");
-        if (temp != 0)
+        _temp = Input.GetAxisRaw("Vertical");
+        if (_temp != 0)
         {
-            Momentum += temp * Vector2.up;
+            Momentum += _temp * Vector2.up;
         }
 
         //float action = Input.GetkeyRaw("Jump");

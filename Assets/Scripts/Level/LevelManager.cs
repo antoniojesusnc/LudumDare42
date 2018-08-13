@@ -195,7 +195,7 @@ public class LevelManager : MonoBehaviour
         {
             animalType = animalData.Key;
             if (animalData.Value > GetPoblationInfo(animalType).MaxAmount)
-                GUIManager.Instance.OpenLoseGUI();
+                FindObjectOfType<GUIManager>().OpenLoseGUI();
         }
     }
 }

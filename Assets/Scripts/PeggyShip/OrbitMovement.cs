@@ -102,4 +102,9 @@ public class OrbitMovement : MonoBehaviour
             transform.up = dirToPlanet;
         }
     }
+
+    internal void RestInertia()
+    {
+        if (_useInertia) _currentSpeed = 0;
+    }
 }

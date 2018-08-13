@@ -31,13 +31,13 @@ public class GUIInGame : MonoBehaviour {
     public void ClickOnRetry()
     {
         Hide();
-        GUIManager.Instance.ClickInRetry();
+        FindObjectOfType<GUIManager>().ClickInRetry();
     }
 
 
     public void ClickOnMainManu()
     {
         Hide();
-        GUIManager.Instance.ClickOnMainManu();
+        FindObjectOfType<GUIManager>().ClickOnMainManu();
     }
 }

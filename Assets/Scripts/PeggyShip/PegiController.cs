@@ -181,6 +181,10 @@ public class PegiController : MonoBehaviour
                     StartAnimOrbitPosition();
 
                 }
+                else
+                {
+                    _orbitMovement.RestInertia();
+                }
             }
         }
     }

@@ -16,6 +16,8 @@ public class PegiAnimator : MonoBehaviour
     Animator _animator;
 
     LevelManager _level;
+    SpriteRenderer _graphic;
+
     void Start()
     {
         _input = GetComponentInChildren<PegiInput>();
@@ -25,7 +27,13 @@ public class PegiAnimator : MonoBehaviour
         _pegi = GetComponent<PegiController>();
         _pegi.OnShock += OnShock;
 
-        
+        _pegi.OnChangeOrbit += OnChangeOrbit;
+        _graphic = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void OnChangeOrbit(int newOrbit)
+    {
+        _graphic.enabled = !PlanetController.IsSpace(newOrbit);
     }
 
     private void OnShock(bool boolean)

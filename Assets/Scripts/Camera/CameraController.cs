@@ -40,8 +40,6 @@ public class CameraController : MonoBehaviour
     PegiController _pegi;
     Vector3 _finalPos;
     Quaternion _finalRotation;
-    [SerializeField]
-    GameObject _pegiGraphic;
 
     LevelManager _level;
     void Start()
@@ -90,12 +88,10 @@ public class CameraController : MonoBehaviour
         if (newOrbit > 3)
         {
             _camera.orthographicSize = _zoomSpace;
-            _pegiGraphic.SetActive(true);
         }
         else
         {
             _camera.orthographicSize = _zoomNormal;
-            _pegiGraphic.SetActive(false);
 
             if (_pegi.IsInSpace)
             {
@@ -104,6 +100,7 @@ public class CameraController : MonoBehaviour
                 transform.rotation = _pegi.transform.rotation;
             }
         }
+        _camera.enabled = !PlanetController.IsSpace(newOrbit);
     }
 
     void LateUpdate()

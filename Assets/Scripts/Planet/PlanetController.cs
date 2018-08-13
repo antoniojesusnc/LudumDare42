@@ -61,4 +61,9 @@ public class PlanetController : MonoBehaviour
         if(_canRotate)
             transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
     }
+
+    public static bool IsSpace(int orbit)
+    {
+        return orbit >= 4;
+    }
 }
