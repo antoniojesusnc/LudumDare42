@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class GUIInGame : MonoBehaviour {
 
+    void Start()
+    {
+        Hide();
+    }
+
     public  void Show()
     {
         Time.timeScale = 0;

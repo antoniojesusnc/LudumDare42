@@ -18,7 +18,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     [Range(0.01f, 1f)]
     float _rateHigh;
-
+    [SerializeField]
+    [Range(0.01f, 1f)]
+    float _rateAbducing;
 
     [SerializeField]
     float _zoomNormal;
@@ -108,7 +110,9 @@ public class CameraController : MonoBehaviour
     {
         _currentOffset = _level.IsAbducting? _offsetAbducing:
             (_pegi.IsInSpace ? _offsetPegiHigh : _offsetPegi);
-        _currentRate = _pegi.IsInSpace ? _rateHigh : _rateNormal;
+
+        _currentRate = _level.IsAbducting? _rateAbducing:
+            (_pegi.IsInSpace ? _rateHigh : _rateNormal);
 
         _finalPos = _pegi.transform.right * _currentOffset.x + _pegi.transform.up * _currentOffset.y;
         transform.position = Vector3.Lerp(transform.position, _finalPos, _currentRate);

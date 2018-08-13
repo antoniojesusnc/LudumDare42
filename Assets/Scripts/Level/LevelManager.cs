@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
 
     // inventory
     InventoryController _inventory;
+    Dictionary<ETypeAnimal, int> _objetive;
 
     void Start()
     {

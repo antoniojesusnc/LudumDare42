@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114909315818356812}
   - component: {fileID: 114790343374520212}
   - component: {fileID: 114387556627602318}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cow
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4908676670741382}
   - component: {fileID: 61924790434807120}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Physic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4825146312821960}
   - component: {fileID: 212234504820854710}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Momentum: {x: 0, y: 0}
+  MomentumDown: {x: 0, y: 0}
 --- !u!114 &114790343374520212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +201,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -219,7 +221,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -324149263
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c4c0269fe5da25b4daf1c2f95a99f821, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

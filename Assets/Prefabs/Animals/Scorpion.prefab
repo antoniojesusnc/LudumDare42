@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4473988321084146}
   - component: {fileID: 212355609663283178}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4904670431068028}
   - component: {fileID: 61540875825220024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Physic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114341915804232922}
   - component: {fileID: 114614494030704738}
   - component: {fileID: 114361204321168958}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Scorpion
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Momentum: {x: 0, y: 0}
+  MomentumDown: {x: 0, y: 0}
 --- !u!114 &114528551308997856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +201,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -219,7 +221,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -324149263
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3e1e7b8bfef650042bb2cd0931740f4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

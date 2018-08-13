@@ -65,8 +65,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969344390994234}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.87, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0.019468337, w: 0.9998105}
+  m_LocalPosition: {x: -0.29198778, y: 7.494338, z: -0.000566297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4084361681164704}
@@ -89,8 +89,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -0.72
-  far clip plane: 1000
+  near clip plane: -1.74
+  far clip plane: 50
   field of view: 60
   orthographic: 1
   orthographic size: 2
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1853885108851132}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1023301f71d8dfc418ea05a2862ca993, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,6 +133,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114527848889040044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,10 +147,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offsetPegi: {x: 0, y: 7.5, z: 0}
   _offsetPegiHigh: {x: 9.49, y: 1.4, z: 0}
+  _offsetAbducing: {x: 0, y: 7.16, z: 0}
   _rateNormal: 0.01
   _rateHigh: 1
+  _rateAbducing: 0.05
   _zoomNormal: 2
-  _zoomHigh: 10.5
+  _zoomSpace: 10.5
+  _zoomAbducing: 1
+  _abducingAnimTime: 1
   _pegiGraphic: {fileID: 1853885108851132}
 --- !u!212 &212817555057538674
 SpriteRenderer:
@@ -164,6 +169,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -183,7 +189,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 673160659
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 45fc0eea4840fa54e8d749ca9479be68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
