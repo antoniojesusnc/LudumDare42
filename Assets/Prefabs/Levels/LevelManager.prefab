@@ -89,7 +89,6 @@ MonoBehaviour:
   - {fileID: 114891979798340006, guid: 6e77a0d0f96bb4c4e98de29ef00b3219, type: 2}
   - {fileID: 114990745819957078, guid: f13ce3814d31c744485a1f2e488500a6, type: 2}
   _allAnimals: []
-  _planet: {fileID: 0}
 --- !u!114 &114135952407292070
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -57,7 +57,7 @@ public class AnimalAnim : MonoBehaviour
 
     void StartAnim()
     {
-
+        CancelAnims();
 
         float duration = UnityEngine.Random.Range(_durationMin, _durationMax);
         float force = UnityEngine.Random.Range(_forceMin, _forceMax);

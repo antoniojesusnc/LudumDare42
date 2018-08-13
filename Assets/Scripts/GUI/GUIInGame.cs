@@ -7,7 +7,6 @@ public class GUIInGame : MonoBehaviour {
 
     void Start()
     {
-        Hide();
     }
 
     public  void Show()

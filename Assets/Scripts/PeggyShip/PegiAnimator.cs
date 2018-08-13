@@ -29,6 +29,7 @@ public class PegiAnimator : MonoBehaviour
 
         _pegi.OnChangeOrbit += OnChangeOrbit;
         _graphic = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     private void OnChangeOrbit(int newOrbit)
