@@ -9,6 +9,14 @@ public class LevelManager : MonoBehaviour
     public event DelegateVoidFunctionBoolParameter OnChangeAbductionState;
 
     [SerializeField]
+    int _minAmountOfAnimals;
+
+    [SerializeField]
+    int _maxAmountOfAnimals;
+
+    public Dictionary<ETypeAnimal, int> VictoryConditions;
+
+    [SerializeField]
     Transform _animalParent;
 
     [SerializeField]
@@ -44,6 +52,7 @@ public class LevelManager : MonoBehaviour
 
     void StartLevel()
     {
+
         _inventory = GetComponent<InventoryController>();
         _planet = GameObject.FindObjectOfType<PlanetController>();
 
@@ -54,6 +63,17 @@ public class LevelManager : MonoBehaviour
         {
             StartCoroutine(CreateNewAnimalDelayed(_animalPoblation[i].AnimalType));
         }
+
+        GenerateVictoryConditions();
+    }
+
+    private void GenerateVictoryConditions()
+    {
+        VictoryConditions = new Dictionary<ETypeAnimal, int>();
+        VictoryConditions.Add(ETypeAnimal.Cow, UnityEngine.Random.Range(_minAmountOfAnimals, _maxAmountOfAnimals));
+        VictoryConditions.Add(ETypeAnimal.Shark, UnityEngine.Random.Range(_minAmountOfAnimals, _maxAmountOfAnimals));
+        VictoryConditions.Add(ETypeAnimal.Camel, UnityEngine.Random.Range(_minAmountOfAnimals, _maxAmountOfAnimals));
+        VictoryConditions.Add(ETypeAnimal.Bear, UnityEngine.Random.Range(_minAmountOfAnimals, _maxAmountOfAnimals));
     }
 
     IEnumerator CreateNewAnimalDelayed(ETypeAnimal animal)
@@ -153,7 +173,7 @@ public class LevelManager : MonoBehaviour
         var angles = _planet.EcosystemAngles[_planet.EcosystemByAnimal[animal.GetAnimalType()]];
         int value = UnityEngine.Random.Range(0, angles.Count);
         var area = angles[value];
-        
+
         int finalAngle = UnityEngine.Random.Range(area.StartAngle, area.EndAngle);
 
         float radians = Mathf.Deg2Rad * finalAngle;
@@ -208,6 +228,7 @@ public class LevelManager : MonoBehaviour
         }
 
         CheckLoseGame();
+        CheckWinGame();
     }
 
     private void CheckLoseGame()
@@ -223,7 +244,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public Vector2 Rotate( Vector2 vector, float degrees)
+    private void CheckWinGame()
+    {
+        bool allConditions = true;
+        ETypeAnimal animalType;
+        foreach (var animalData in VictoryConditions)
+        {
+            animalType = animalData.Key;
+            allConditions &= animalData.Value <= _inventory.InventorySent[animalType];
+        }
+        if (allConditions)
+            FindObjectOfType<GUIManager>().OpenVictoryGUI();
+    }
+
+    public Vector2 Rotate(Vector2 vector, float degrees)
     {
         float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
         float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
@@ -235,3 +269,4 @@ public class LevelManager : MonoBehaviour
         return vector;
     }
 }
+

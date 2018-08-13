@@ -23,6 +23,9 @@ public class GUIInventory : MonoBehaviour
     List<TMPro.TextMeshProUGUI> _text;
 
     [SerializeField]
+    List<TMPro.TextMeshProUGUI> _remainingText;
+
+    [SerializeField]
     List<Image> _downBar;
 
     InventoryController _inventory;
@@ -31,8 +34,11 @@ public class GUIInventory : MonoBehaviour
 
     bool _enabled;
 
+    LevelManager _level;
+
     void Start()
     {
+        _level = FindObjectOfType<LevelManager>(); ;
         _inventory = FindObjectOfType<InventoryController>();
         _topElements = new List<Image>();
         GameObject reference = _topBar.transform.GetChild(0).gameObject;
@@ -65,8 +71,24 @@ public class GUIInventory : MonoBehaviour
         UpdateInput();
         CheckSomeSent();
 
+        CheckRemainingInventory();
         CheckCurrentInventory();
     }
+
+    private void CheckRemainingInventory()
+    {
+        ETypeAnimal animal;
+        int amount = 0;
+        for (int i = 0; i < _remainingText.Count; ++i)
+        {
+            animal = GetByIndex(i);
+            amount = (_level.VictoryConditions[animal] - _inventory.InventorySent[animal]);
+
+            _remainingText[i].text = "X"+ (amount < 0 ? "0" : amount.ToString());
+        }
+    }
+
+
 
     private void CheckCurrentInventory()
     {
@@ -86,7 +108,7 @@ public class GUIInventory : MonoBehaviour
     {
         for (int i = _downBar.Count - 1; i >= 0; i--)
         {
-            if(_downBar[i].fillAmount >= 1)
+            if (_downBar[i].fillAmount >= 1)
             {
                 Sent(i);
             }
@@ -106,14 +128,14 @@ public class GUIInventory : MonoBehaviour
     {
         for (int i = _downBar.Count - 1; i >= 0; i--)
         {
-            if(_downBar[i].fillAmount >= 0)
+            if (_downBar[i].fillAmount >= 0)
                 _downBar[i].fillAmount -= _downaRate * Time.deltaTime;
         }
     }
 
     private void UpdateCounters()
     {
-            _text[0].text = "X"+ _inventory.InventoryInPegi[ETypeAnimal.Shark];
+        _text[0].text = "X" + _inventory.InventoryInPegi[ETypeAnimal.Shark];
         _text[1].text = "X" + _inventory.InventoryInPegi[ETypeAnimal.Camel];
         _text[2].text = "X" + _inventory.InventoryInPegi[ETypeAnimal.Bear];
         _text[3].text = "X" + _inventory.InventoryInPegi[ETypeAnimal.Cow];
@@ -152,7 +174,7 @@ public class GUIInventory : MonoBehaviour
         LeanTween.scale(button, Vector3.one * 1.1f, 0.017f).setLoopPingPong(1);
         LeanTween.alpha(button, 1, 0.017f).setLoopPingPong(1);
 
-        if(_inventory.InventoryInPegi[GetAnimal(key)] > 0)
+        if (_inventory.InventoryInPegi[GetAnimal(key)] > 0)
             _downBar[index].fillAmount += _amountPerClick;
     }
 
