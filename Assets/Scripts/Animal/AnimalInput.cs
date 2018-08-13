@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,9 +28,14 @@ public class AnimalInput : InputController
         _timeStamp -= Time.deltaTime;
         if (_timeStamp <= 0)
         {
-            _timeStamp = Random.Range(MinTimeMovement, MaxTimeMovement);
-            _direction = Vector2.right * (Random.value < 0.5 ? -1 : 1);
+            NewDirection();
         }
         Momentum = _direction;
+    }
+
+    public void NewDirection()
+    {
+        _timeStamp = UnityEngine. Random.Range(MinTimeMovement, MaxTimeMovement);
+        _direction = Vector2.right * (UnityEngine.Random.value < 0.5 ? -1 : 1);
     }
 }

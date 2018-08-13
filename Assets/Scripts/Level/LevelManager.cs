@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     // inventory
     InventoryController _inventory;
     Dictionary<ETypeAnimal, int> _objetive;
+    PlanetController _planet;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class LevelManager : MonoBehaviour
     void StartLevel()
     {
         _inventory = GetComponent<InventoryController>();
+        _planet = GameObject.FindObjectOfType<PlanetController>();
 
         AnimalAmount = new Dictionary<ETypeAnimal, int>();
         GenerateStartedAnimals();
@@ -147,7 +149,27 @@ public class LevelManager : MonoBehaviour
     {
         var temp = Instantiate<AnimalController>(animal, _animalParent);
         temp.Init(animal.GetAnimalType());
-        Vector2 point = UnityEngine.Random.insideUnitCircle;
+
+        var angles = _planet.EcosystemAngles[_planet.EcosystemByAnimal[animal.GetAnimalType()]];
+        int value = UnityEngine.Random.Range(0, angles.Count);
+        var area = angles[value];
+        
+        int finalAngle = UnityEngine.Random.Range(area.StartAngle, area.EndAngle);
+
+        float radians = Mathf.Deg2Rad * finalAngle;
+        Vector2 finalPosition = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians));
+
+        //Debug.Log(animal.GetAnimalType().ToString() + " : "+ finalAngle);
+        //Vector2 finalPosition = Rotate(Vector2.up, finalAngle);
+
+        /*
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        go.name = animal.GetAnimalType().ToString();
+        go.transform.position = finalPosition;
+        */
+
+        //Vector2 point = UnityEngine.Random.insideUnitCircle;
+        Vector2 point = finalPosition;
         temp.transform.position = point;
 
         _allAnimals.Add(temp);
@@ -199,5 +221,17 @@ public class LevelManager : MonoBehaviour
             if (animalData.Value < GetPoblationInfo(animalType).MinAmount)
                 FindObjectOfType<GUIManager>().OpenLoseGUI();
         }
+    }
+
+    public Vector2 Rotate( Vector2 vector, float degrees)
+    {
+        float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+
+        float tx = vector.x;
+        float ty = vector.y;
+        vector.x = (cos * tx) - (sin * ty);
+        vector.y = (sin * tx) + (cos * ty);
+        return vector;
     }
 }

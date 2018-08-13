@@ -12,45 +12,41 @@ MonoBehaviour:
   m_Name: Planet01
   m_EditorClassIdentifier: 
   m_Angles:
-  - m_Start: -21
-    m_End: 55
+  - m_Start: 0
+    m_End: 35
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: a178bc6699cf00248a2a4588fd8df111, type: 3}
+  - m_Start: 35
+    m_End: 101
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: d7f7ef598594cdf42bd7fd96b882f0b7, type: 3}
+  - m_Start: 101
+    m_End: 143
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: d7f7ef598594cdf42bd7fd96b882f0b7, type: 3}
+  - m_Start: 143
+    m_End: 203
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: a178bc6699cf00248a2a4588fd8df111, type: 3}
+  - m_Start: 203
+    m_End: 235
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: 77cc561bc15949647b690693fa0bd584, type: 3}
+  - m_Start: 235
+    m_End: 289
     m_Order: 0
     m_Sprites:
     - {fileID: 21300000, guid: d67a2b53f76544b4cb395465bdf81107, type: 3}
-  - m_Start: -113
-    m_End: -61
+  - m_Start: 289
+    m_End: 360
     m_Order: 0
     m_Sprites:
-    - {fileID: 21300000, guid: d7f7ef598594cdf42bd7fd96b882f0b7, type: 3}
-  - m_Start: -138
-    m_End: -113
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: 77cc561bc15949647b690693fa0bd584, type: 3}
-  - m_Start: -61
-    m_End: -60
-    m_Order: 0
-    m_Sprites: []
-  - m_Start: 55
-    m_End: 121
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: a178bc6699cf00248a2a4588fd8df111, type: 3}
-  - m_Start: -60
-    m_End: -21
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: 77cc561bc15949647b690693fa0bd584, type: 3}
-  - m_Start: -190
-    m_End: -138
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: d7f7ef598594cdf42bd7fd96b882f0b7, type: 3}
-  - m_Start: 121
-    m_End: 170
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: a178bc6699cf00248a2a4588fd8df111, type: 3}
+    - {fileID: 21300000, guid: d67a2b53f76544b4cb395465bdf81107, type: 3}
   m_FillTexture: {fileID: 2800000, guid: e7cd8a56e668ced4c96907fe70bcaac5, type: 3}
   m_CornerSprites:
   - m_CornerType: 0

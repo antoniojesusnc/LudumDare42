@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class PlanetController : MonoBehaviour
 {
 
     [SerializeField]
     float _surface;
-
     [SerializeField]
     float _orbit01;
     [SerializeField]
@@ -19,6 +19,23 @@ public class PlanetController : MonoBehaviour
     float _space;
     [SerializeField]
     float _angularVelocity;
+
+
+    [Header("MaxSize")]
+    [SerializeField]
+    int _minSize;
+    [SerializeField]
+    int _maxSize;
+    [SerializeField]
+    List<Sprite> _ecoSystem;
+
+    [Header("animalByEcosystem")]
+    [SerializeField]
+    List<PlanetControllerInfo> _animalAndEcosystems;
+
+    public Dictionary <EEcosystem, List<PlanetControllerInfoEcosystem>> EcosystemAngles { get; private set; }
+
+    public Dictionary<ETypeAnimal, EEcosystem> EcosystemByAnimal { get; set; }
 
     bool _canRotate = true;
 
@@ -49,6 +66,89 @@ public class PlanetController : MonoBehaviour
     private void Start()
     {
         GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbductionState;
+
+        EcosystemByAnimal = new Dictionary<ETypeAnimal, EEcosystem>();
+        for (int i = _animalAndEcosystems.Count - 1; i >= 0; --i)
+        {
+            EcosystemByAnimal.Add(_animalAndEcosystems[i].animalType, _animalAndEcosystems[i].ecosystem);
+        }
+
+        EcosystemAngles = new Dictionary<EEcosystem, List<PlanetControllerInfoEcosystem>>();
+        EcosystemAngles.Add(EEcosystem.Dessert, new List<PlanetControllerInfoEcosystem>());
+        EcosystemAngles.Add(EEcosystem.Forest, new List<PlanetControllerInfoEcosystem>());
+        EcosystemAngles.Add(EEcosystem.Mountain, new List<PlanetControllerInfoEcosystem>());
+        EcosystemAngles.Add(EEcosystem.Sea, new List<PlanetControllerInfoEcosystem>());
+
+        GenerateEcoSystem();
+    }
+
+    private void GenerateEcoSystem()
+    {
+        List<AngleRange> angles = new List<AngleRange>();
+        SpriteShape spriteShape = GetComponentInChildren<SpriteShapeController>().spriteShape;
+
+        bool isDone = false;
+        int acumSize = 0;
+        int remainingSize = 360;
+        int nextMaxSize;
+
+        int size;
+
+        AngleRange newAngle;
+
+        EEcosystem ecosystem;
+
+        while (!isDone)
+        {
+            nextMaxSize = Math.Min(_maxSize, remainingSize);
+
+            remainingSize = 360 - acumSize;
+            size = UnityEngine.Random.RandomRange(_minSize, nextMaxSize);
+            if( (acumSize +size) > 360)
+            {
+                size = (360 - acumSize);
+            }
+
+            if ((360 - (acumSize + size)) < _minSize)
+                size += (360 - (acumSize + size));
+
+            newAngle = new AngleRange();
+            newAngle.sprites = new List<Sprite>();
+            ecosystem = (EEcosystem)UnityEngine.Random.Range(0, 4);
+            newAngle.sprites.Add(_ecoSystem[(int)ecosystem]);
+            newAngle.start = acumSize;
+            newAngle.end = acumSize + size;
+
+            acumSize += size;
+            remainingSize -= size;
+
+            if (remainingSize <= 0)
+                isDone = true;
+
+            EcosystemAngles[ecosystem].Add(new PlanetControllerInfoEcosystem((int)newAngle.start, (int)newAngle.end, ecosystem));
+
+            angles.Add(newAngle);
+        }
+
+        spriteShape.angleRanges = angles;
+    }
+
+    public void IsInArea(AnimalController animal)
+    {
+        EEcosystem ecosystem = EcosystemByAnimal[animal.GetAnimalType()];
+        if(!IsAngleOfEcosystem(animal.transform.position, ecosystem))
+        {
+            animal.ChangeDirection();
+        }
+    }
+
+    private bool IsAngleOfEcosystem(Vector3 position, EEcosystem ecosystem)
+    {
+        float angle = Vector3.SignedAngle(transform.up, position - transform.position, Vector3.forward);
+
+        //Debug.Log(angle);
+
+        return true;
     }
 
     private void OnChangeAbductionState(bool boolean)
@@ -58,7 +158,7 @@ public class PlanetController : MonoBehaviour
 
     public void Update()
     {
-        if(_canRotate)
+        if (_canRotate)
             transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
     }
 

@@ -34,7 +34,7 @@ public class PegiAnimator : MonoBehaviour
 
     private void OnChangeOrbit(int newOrbit)
     {
-        _graphic.enabled = !PlanetController.IsSpace(newOrbit);
+        //_graphic.enabled = !PlanetController.IsSpace(newOrbit);
     }
 
     private void OnShock(bool boolean)

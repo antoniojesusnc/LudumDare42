@@ -33,6 +33,8 @@ public class AnimalController : MonoBehaviour
     [SerializeField]
     OrbitMovement _orbitMovement;
 
+    PlanetController _planet;
+
     public event DelegateVoidFunctionBoolParameter OnBeingAbduced;
 
     bool _beingAbduced;
@@ -66,7 +68,7 @@ public class AnimalController : MonoBehaviour
             _isReproducing = value;
             if (OnIsReproducing != null)
                 OnIsReproducing(value);
-                _orbitMovement.enabled = !_isReproducing;
+            _orbitMovement.enabled = !_isReproducing;
 
         }
     }
@@ -91,6 +93,7 @@ public class AnimalController : MonoBehaviour
     {
         Init(_typeAnimal);
 
+        _planet = GameObject.FindObjectOfType<PlanetController>();
     }
 
     public void Init(ETypeAnimal typeAnimal)
@@ -104,7 +107,7 @@ public class AnimalController : MonoBehaviour
 
         if (IsReproducing)
         {
-           // DoJumpReproduction(false);
+            // DoJumpReproduction(false);
         }
     }
 
@@ -115,7 +118,7 @@ public class AnimalController : MonoBehaviour
 
         var moveUp = LeanTween.move(gameObject, transform.position + jumpUP, ReproductionJumpTime * 0.5f)
                .setEase(LeanTweenType.easeOutQuad);
-        var moveSide  = LeanTween.move(gameObject, transform.position+ jumpSide*2, ReproductionJumpTime * 0.5f)
+        var moveSide = LeanTween.move(gameObject, transform.position + jumpSide * 2, ReproductionJumpTime * 0.5f)
                .setEase(LeanTweenType.easeOutQuad);
         var sequence = LeanTween.sequence();
         sequence.append(moveUp);
@@ -130,6 +133,16 @@ public class AnimalController : MonoBehaviour
     public void UpdateAnimal()
     {
 
+    }
+
+    private void LateUpdate()
+    {
+        _planet.IsInArea(this);
+    }
+
+    public void ChangeDirection()
+    {
+        GetComponent<AnimalInput>().NewDirection();
     }
 
     public void StartAbduction()
