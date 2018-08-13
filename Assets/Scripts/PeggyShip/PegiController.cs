@@ -7,6 +7,8 @@ public class PegiController : MonoBehaviour
 {
 
     public event DelegateVoidFunctionIntParameter OnChangeOrbit;
+    public event DelegateVoidFunctionBoolParameter OnShock;
+
     [SerializeField]
     PegiInput _input;
 
@@ -19,9 +21,15 @@ public class PegiController : MonoBehaviour
     float _acceleration;
     [SerializeField]
     float _decceleration;
+    [SerializeField]
+    float _modSpeedWhenNormalCloud;
+    [SerializeField]
+    float _shockTime ;
 
     [SerializeField]
     float _orbitCoolDown;
+
+    LevelManager _level;
 
     int _currentOrbit = 1;
     public int CurrentObit
@@ -52,7 +60,7 @@ public class PegiController : MonoBehaviour
     {
         get
         {
-            return _canMove && !LevelManager.Instance.IsAbducting;
+            return _canMove && !_level.IsAbducting;
         }
         set
         {
@@ -67,8 +75,13 @@ public class PegiController : MonoBehaviour
 
     PlanetController _planet;
 
+
+    // shocking vars
+    public bool IsInShock { get; private set; }
+
     void Start()
     {
+        _level = GameObject.FindObjectOfType<LevelManager>();
         _currentSpeed = _speed;
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
         _orbitMovement.Speed = _speed;
@@ -107,7 +120,9 @@ public class PegiController : MonoBehaviour
             RaycastHit HitInfo = new RaycastHit();
             Vector2 dir = (Vector2)(_planet.transform.position - transform.position).normalized;
             ContactFilter2D contact2D = new ContactFilter2D();
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
+            //Debug.DrawLine(transform.position, transform.position+ (Vector3)dir*5,Color.blue, 5);
+            ContactFilter2D filter = new ContactFilter2D();
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 5, 1 << LayerMask.NameToLayer("Animal"));
             if (hit.collider != null)
             {
                 StartAbductionMode(hit.collider.GetComponentInParent<AnimalController>());
@@ -117,7 +132,7 @@ public class PegiController : MonoBehaviour
 
     private void StartAbductionMode(AnimalController animalBeingAbduced)
     {
-        LevelManager.Instance.SetAbductionMode(true);
+        _level.SetAbductionMode(true);
         AnimalBeingAbduced = animalBeingAbduced;
         AnimalBeingAbduced.StartAbduction();
 
@@ -128,16 +143,16 @@ public class PegiController : MonoBehaviour
     {
         if (_input.Shooting)
         {
-            LevelManager.Instance.SetAbductionMode(false);
+            _level.SetAbductionMode(false);
             AnimalBeingAbduced.FinishAbduction();
         }
     }
 
     public void SusscessfulAbduction()
     {
-        
 
-        LevelManager.Instance.AnimalAbducedSuccessFul(AnimalBeingAbduced);
+
+        _level.AnimalAbducedSuccessFul(AnimalBeingAbduced);
 
         AnimalBeingAbduced = null;
     }
@@ -180,5 +195,29 @@ public class PegiController : MonoBehaviour
     void FinishAnimOrbitPosition()
     {
         _orbitMovement.AnimChangeOrbit = false;
+    }
+
+    public void OnEnterInNormalCloud()
+    {
+        _orbitMovement.SpeedMod = _modSpeedWhenNormalCloud;
+    }
+    public void OnEnterInAngryCloud()
+    {
+        IsInShock = true;
+        if (OnShock != null) OnShock(IsInShock);
+        StopAllCoroutines();
+        StartCoroutine(FinishShockDelayedCo());
+    }
+
+    private IEnumerator FinishShockDelayedCo()
+    {
+        yield return new WaitForSeconds(_shockTime);
+        IsInShock = false;
+        if (OnShock != null) OnShock(IsInShock);
+    }
+
+    public void OnExitNormalCloud()
+    {
+        _orbitMovement.SpeedMod = 0;
     }
 }

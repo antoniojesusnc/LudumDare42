@@ -12,6 +12,8 @@ public class CloudController : MonoBehaviour
     OrbitMovement _orbitMov;
     Animator _animator;
 
+    public bool IsAngry { get; private set; }
+    public bool IsBeingDestroyed { get; set; }
 
     public void Init(int orbit, int cloudID, float timeNormal, float timeAngry, float speed)
     {
@@ -29,6 +31,7 @@ public class CloudController : MonoBehaviour
     private IEnumerator BecomeAngryCo(float timeNormal)
     {
         yield return new WaitForSeconds(timeNormal);
+        IsAngry = true;
         _animator.SetBool(AnimKeyStorm, true);
     }
 }

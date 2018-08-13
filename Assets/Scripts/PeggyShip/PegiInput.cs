@@ -13,11 +13,13 @@ public class PegiInput : InputController
     public bool Shooting;
 
     OrbitMovement _orbit;
+    PegiController _pegi;
 
     private void Start()
     {
         _orbit = GetComponent<OrbitMovement>();
-        LevelManager.Instance.OnChangeAbductionState += OnChangeAbductionState;
+        GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbductionState;
+        _pegi = GetComponent<PegiController>();
 
     }
 
@@ -28,6 +30,9 @@ public class PegiInput : InputController
     void Update()
     {
         ResetVars();
+
+        if (_pegi.IsInShock)
+            return;
 
         float temp = Input.GetAxisRaw("HorizontalPegi");
         if (temp != 0)

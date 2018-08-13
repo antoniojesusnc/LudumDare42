@@ -83,7 +83,7 @@ public class CloudManager : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         LeanTween.alpha(newCloud.GetComponentInChildren<SpriteRenderer>().gameObject, 0, _alphaAnimTime);
-
+        newCloud.IsBeingDestroyed = true;
         yield return new WaitForSeconds(_alphaAnimTime);
 
         Destroy(newCloud.gameObject);

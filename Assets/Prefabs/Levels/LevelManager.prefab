@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4125046476862878}
   - component: {fileID: 114076006005966824}
+  - component: {fileID: 114135952407292070}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -59,25 +60,29 @@ MonoBehaviour:
     MinDangerAmount: 10
     MaxDangerAmount: 15
     MaxAmount: 20
-    ReproductionRate: 0
+    ReproductionMinTime: 5
+    ReproductionMaxTime: 10
   - AnimalType: 1
     MinAmount: 5
     MinDangerAmount: 10
     MaxDangerAmount: 15
     MaxAmount: 20
-    ReproductionRate: 0
+    ReproductionMinTime: 5
+    ReproductionMaxTime: 10
   - AnimalType: 2
     MinAmount: 5
     MinDangerAmount: 10
     MaxDangerAmount: 15
     MaxAmount: 20
-    ReproductionRate: 0
+    ReproductionMinTime: 5
+    ReproductionMaxTime: 10
   - AnimalType: 3
     MinAmount: 5
     MinDangerAmount: 10
     MaxDangerAmount: 15
     MaxAmount: 20
-    ReproductionRate: 0
+    ReproductionMinTime: 5
+    ReproductionMaxTime: 10
   _animalPrefabs:
   - {fileID: 114990745819957078, guid: bc8fd17dcee77c64ea83134d5b3295ba, type: 2}
   - {fileID: 114528551308997856, guid: 7bc291976d05019489b4d9390dc66caa, type: 2}
@@ -85,3 +90,15 @@ MonoBehaviour:
   - {fileID: 114990745819957078, guid: f13ce3814d31c744485a1f2e488500a6, type: 2}
   _allAnimals: []
   _planet: {fileID: 0}
+--- !u!114 &114135952407292070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608543627465046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c803d664c2e825f428943e1c2a7e40e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryCapacity: 20

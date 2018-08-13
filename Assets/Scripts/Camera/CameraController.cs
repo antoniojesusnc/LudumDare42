@@ -41,15 +41,19 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     GameObject _pegiGraphic;
 
+    LevelManager _level;
     void Start()
     {
+
+        _level = GameObject.FindObjectOfType<LevelManager>();
+
         _camera = GetComponent<Camera>();
         _camera.orthographicSize = _zoomNormal;
         _pegi = GameObject.FindGameObjectWithTag("Player").GetComponent<PegiController>();
         _finalPos = new Vector3();
 
         _pegi.OnChangeOrbit += OnChangeOrbit;
-        LevelManager.Instance.OnChangeAbductionState += OnChangeAbducingState;
+        GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbducingState;
     }
 
     private void OnChangeAbducingState(bool abducing)
@@ -102,7 +106,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        _currentOffset = LevelManager.Instance.IsAbducting? _offsetAbducing:
+        _currentOffset = _level.IsAbducting? _offsetAbducing:
             (_pegi.IsInSpace ? _offsetPegiHigh : _offsetPegi);
         _currentRate = _pegi.IsInSpace ? _rateHigh : _rateNormal;
 

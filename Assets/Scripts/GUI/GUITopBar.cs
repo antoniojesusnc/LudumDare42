@@ -35,7 +35,7 @@ public class GUITopBar : MonoBehaviour
 
     private void Start()
     {
-        _level = LevelManager.Instance;
+        _level = GameObject.FindObjectOfType<LevelManager>();
 
         _lastValue = new Dictionary<ETypeAnimal, int>();
         

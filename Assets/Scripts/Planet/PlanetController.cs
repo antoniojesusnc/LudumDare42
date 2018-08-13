@@ -20,6 +20,8 @@ public class PlanetController : MonoBehaviour
     [SerializeField]
     float _angularVelocity;
 
+    bool _canRotate = true;
+
     public float GetOrbitPosition(int orbit)
     {
         switch (orbit)
@@ -44,8 +46,19 @@ public class PlanetController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _space);
     }
 
-    public void UpdatePlanet()
+    private void Start()
     {
-        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
+        GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbductionState;
+    }
+
+    private void OnChangeAbductionState(bool boolean)
+    {
+        _canRotate = !boolean;
+    }
+
+    public void Update()
+    {
+        if(_canRotate)
+            transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + _angularVelocity * Time.deltaTime);
     }
 }

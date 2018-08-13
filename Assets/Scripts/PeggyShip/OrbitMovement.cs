@@ -24,13 +24,16 @@ public class OrbitMovement : MonoBehaviour
     {
         get
         {
-            return _speed;
+            return _speed * (SpeedMod == 0?1:SpeedMod);
         }
         set
         {
             _speed = value;
         }
     }
+
+    public float SpeedMod{ get; set; }
+
     float _currentSpeed;
 
     public int CurrentOrbit { get; set; }
@@ -43,7 +46,7 @@ public class OrbitMovement : MonoBehaviour
     void Start()
     {
         _planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<PlanetController>();
-        LevelManager.Instance.OnChangeAbductionState += OnChangeAbductionState;
+        GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbductionState;
     }
 
     private void OnChangeAbductionState(bool enabled)

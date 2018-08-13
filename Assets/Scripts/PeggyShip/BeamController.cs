@@ -60,7 +60,7 @@ public class BeamController : MonoBehaviour
         _pegi = GetComponent<PegiController>();
 
 
-        LevelManager.Instance.OnChangeAbductionState += OnChangeAbductionState;
+        GameObject.FindObjectOfType<LevelManager>().OnChangeAbductionState += OnChangeAbductionState;
     }
 
     private void OnChangeAbductionState(bool enabled)

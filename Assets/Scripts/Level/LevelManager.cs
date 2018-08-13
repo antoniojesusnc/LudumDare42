@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : SingletonMonoBehaviour<LevelManager>
+public class LevelManager : MonoBehaviour
 {
     public bool IsAbducting;
     public event DelegateVoidFunctionBoolParameter OnChangeAbductionState;
@@ -30,8 +30,6 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     [Header("Level Elements")]
     [SerializeField]
     List<AnimalController> _allAnimals = new List<AnimalController>();
-    [SerializeField]
-    PlanetController _planet;
 
 
     // inventory
@@ -168,11 +166,6 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
             _allAnimals[i].UpdateAnimal();
         }
 
-        if (!IsAbducting)
-        {
-            _planet.UpdatePlanet();
-        }
-
         CheckLoseGame();
     }
 
@@ -183,7 +176,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         {
             animalType = animalData.Key;
             if (animalData.Value > GetPoblationInfo(animalType).MaxAmount)
-                Debug.LogError("GameOver");
+                GUIManager.Instance.OpenLoseGUI();
         }
     }
 }

@@ -373,7 +373,6 @@ public class KeyChallengeController : MonoBehaviour
         }
 
         keyChallengeInfo.ObjKey.transform.localScale = Vector3.one * 1.1f;
-        Debug.Log("SuccessKey " + isPerfect);
 
         LeanTween.cancel(_feedBackText.gameObject);
 
@@ -395,7 +394,5 @@ public class KeyChallengeController : MonoBehaviour
         keyChallengeInfo.ObjKey.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 0.4f, 0.4f);
         _secondsToFinish += _timeToAddIfFail;
         keyChallengeInfo.Failed = true;
-
-        Debug.Log("FailKey ");
     }
 }
