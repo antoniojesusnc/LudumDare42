@@ -161,6 +161,18 @@ public class PegiController : MonoBehaviour
 
     private void SetOrbitPosition()
     {
+        if (IsInSpace)
+        {
+            if (_input.Momentum.y != 0)
+                _input.Momentum.Set(0, 0);
+
+            if (_input.Shooting)
+            {
+                _input.Momentum.Set(0, -1); 
+            }
+        }
+
+
         _orbitTimeStamp -= Time.deltaTime;
         if (_input.Momentum.y != 0 && _orbitTimeStamp <= 0)
         {

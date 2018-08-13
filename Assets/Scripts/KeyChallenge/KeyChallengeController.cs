@@ -101,13 +101,17 @@ public class KeyChallengeController : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Debug InitChallenge");
-        InitChallenge(10, 0.7f, 2);
+        
     }
 
     private void OnDisable()
     {
         StopChallenge();
+    }
+
+    private void Start()
+    {
+       
     }
 
     public void InitChallenge(float secondsToFinish, float timeBetweenKeys, float speed)
@@ -134,14 +138,17 @@ public class KeyChallengeController : MonoBehaviour
         _playing = false;
         StopAllCoroutines();
 
-        foreach (var keys in _keyActives)
+        if (_keyActives != null)
         {
-            for (int i = keys.Value.Count - 1; i >= 0; --i)
+            foreach (var keys in _keyActives)
             {
-                Destroy(keys.Value[i].ObjKey.gameObject);
+                for (int i = keys.Value.Count - 1; i >= 0; --i)
+                {
+                    Destroy(keys.Value[i].ObjKey.gameObject);
+                }
             }
+            _keyActives.Clear();
         }
-        _keyActives.Clear();
 
     }
 

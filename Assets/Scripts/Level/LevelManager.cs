@@ -130,7 +130,7 @@ public class LevelManager : MonoBehaviour
 
     internal void AnimalAbducedSuccessFul(AnimalController animalBeingAbduced)
     {
-        _inventory.AddAnimal(animalBeingAbduced.GetAnimalType());
+        _inventory.AddAnimalToPegi(animalBeingAbduced.GetAnimalType());
         SetAbductionMode(false);
         _allAnimals.Remove(animalBeingAbduced);
         --AnimalAmount[animalBeingAbduced.GetAnimalType()];

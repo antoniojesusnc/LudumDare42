@@ -240,6 +240,9 @@ MonoBehaviour:
   _minTimeChangeDirection: 1
   _maxTimeChangeDirection: 5
   _reproductionJumpDistance: 0.2
+  _KeyChallengeSecondsToFinish: 5
+  _KeyChallengeTimeBetweenKeys: 0.7
+  _KeyChallengeSpeed: 1
   _typeAnimal: 3
   _input: {fileID: 114387556627602318}
   _orbitMovement: {fileID: 114790343374520212}

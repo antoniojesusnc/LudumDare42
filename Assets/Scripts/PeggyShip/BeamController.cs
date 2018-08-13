@@ -36,8 +36,8 @@ public class BeamController : MonoBehaviour
 
 
     Vector3 _animalStartPos;
-    Color _animalInitialColor ;
-    Vector3 _animalInitialScale ;
+    Color _animalInitialColor;
+    Vector3 _animalInitialScale;
 
     OrbitMovement _orbitMovement;
 
@@ -88,6 +88,12 @@ public class BeamController : MonoBehaviour
         yield return new WaitForSeconds(timeToDisable);
         _keyChallenge.gameObject.SetActive(true);
 
+        _keyChallenge.InitChallenge(
+            _pegi.AnimalBeingAbduced.KeyChallengeSecondsToFinish,
+            _pegi.AnimalBeingAbduced.KeyChallengeTimeBetweenKeys,
+            _pegi.AnimalBeingAbduced.KeyChallengeSpeed
+            );
+
         AnimalStartAbduction();
 
     }
@@ -107,8 +113,8 @@ public class BeamController : MonoBehaviour
 
     private void AnimalStartAbduction()
     {
-       
-            
+
+
         StartCoroutine(AnimalAscensionCo());
 
     }
@@ -128,7 +134,7 @@ public class BeamController : MonoBehaviour
         float factor;
         while (true)
         {
-            factor= _keyChallenge.CompleteFactor;
+            factor = _keyChallenge.CompleteFactor;
             _pegi.AnimalBeingAbduced.transform.position = Vector3.Lerp(_animalStartPos, _animalFinishPosition.position, factor);
             animalGraphic.color = Color.Lerp(_animalInitialColor, finalColor, factor);
             _pegi.AnimalBeingAbduced.transform.localScale = Vector3.Lerp(_animalInitialScale, finalScale, factor);

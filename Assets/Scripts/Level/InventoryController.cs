@@ -8,14 +8,19 @@ public class InventoryController : MonoBehaviour
 
     [SerializeField]
     int _inventoryCapacity;
+    public int InventoryCapacity
+    {
+        get { return _inventoryCapacity; }
+        set { _inventoryCapacity = value; }
+    }
 
-    public Dictionary<ETypeAnimal, int> Inventory { get; private set; }
+    public Dictionary<ETypeAnimal, int> InventoryInPegi { get; private set; }
     public bool IsInventoryFull
     {
         get
         {
             int sum = 0;
-            foreach (var item in Inventory)
+            foreach (var item in InventoryInPegi)
             {
                 sum += item.Value;
             }
@@ -23,19 +28,23 @@ public class InventoryController : MonoBehaviour
             return sum >= _inventoryCapacity;
         }
     }
+    public Dictionary<ETypeAnimal, int> InventorySent { get; private set; }
 
     private void Start()
     {
-        Inventory = new Dictionary<ETypeAnimal, int>();
+        InventoryInPegi = new Dictionary<ETypeAnimal, int>();
+        InventorySent = new Dictionary<ETypeAnimal, int>();
 
-        Inventory = new Dictionary<ETypeAnimal, int>();
+        for (int i = (int)ETypeAnimal.Size - 1; i >= 0; --i)
+        {
+            InventoryInPegi.Add((ETypeAnimal)i, 0);
+            InventorySent.Add((ETypeAnimal)i, 0);
+        }
     }
 
-    public void AddAnimal(ETypeAnimal typeAnimal)
+    public void AddAnimalToPegi(ETypeAnimal typeAnimal)
     {
-        if (!Inventory.ContainsKey(typeAnimal))
-            Inventory.Add(typeAnimal, 0);
-
-        ++Inventory[typeAnimal];
+        ++InventoryInPegi[typeAnimal];
     }
 }
+

@@ -6,11 +6,18 @@ public class GUIMainMenu : MonoBehaviour {
 
 	public void ClickOnNewGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+
+    public void ClickONExit()
+    {
+        Application.Quit();
     }
 
     public void ClickInAudio()
     {
         
     }
+
+
 }

@@ -33,7 +33,11 @@ public class PlanetController : MonoBehaviour
     [SerializeField]
     List<PlanetControllerInfo> _animalAndEcosystems;
 
-    public Dictionary <EEcosystem, List<PlanetControllerInfoEcosystem>> EcosystemAngles { get; private set; }
+    [SerializeField]
+    bool _generateMap;
+
+
+    public Dictionary<EEcosystem, List<PlanetControllerInfoEcosystem>> EcosystemAngles { get; private set; }
 
     public Dictionary<ETypeAnimal, EEcosystem> EcosystemByAnimal { get; set; }
 
@@ -79,7 +83,20 @@ public class PlanetController : MonoBehaviour
         EcosystemAngles.Add(EEcosystem.Mountain, new List<PlanetControllerInfoEcosystem>());
         EcosystemAngles.Add(EEcosystem.Sea, new List<PlanetControllerInfoEcosystem>());
 
-        GenerateEcoSystem();
+        if (_generateMap)
+        {
+            GenerateEcoSystem();
+        }
+        else
+        {
+            EcosystemAngles[EEcosystem.Sea].Add(new PlanetControllerInfoEcosystem(0, -35, EEcosystem.Sea));
+            EcosystemAngles[EEcosystem.Mountain].Add(new PlanetControllerInfoEcosystem(-35, -101, EEcosystem.Mountain));
+            EcosystemAngles[EEcosystem.Mountain].Add(new PlanetControllerInfoEcosystem(-101, -143, EEcosystem.Mountain));
+            EcosystemAngles[EEcosystem.Sea].Add(new PlanetControllerInfoEcosystem(-143, -203, EEcosystem.Sea));
+            EcosystemAngles[EEcosystem.Dessert].Add(new PlanetControllerInfoEcosystem(-203, -235, EEcosystem.Dessert));
+
+            EcosystemAngles[EEcosystem.Forest].Add(new PlanetControllerInfoEcosystem(-235, -360, EEcosystem.Forest));
+        }
     }
 
     private void GenerateEcoSystem()
@@ -104,7 +121,7 @@ public class PlanetController : MonoBehaviour
 
             remainingSize = 360 - acumSize;
             size = UnityEngine.Random.RandomRange(_minSize, nextMaxSize);
-            if( (acumSize +size) > 360)
+            if ((acumSize + size) > 360)
             {
                 size = (360 - acumSize);
             }
@@ -136,7 +153,7 @@ public class PlanetController : MonoBehaviour
     public void IsInArea(AnimalController animal)
     {
         EEcosystem ecosystem = EcosystemByAnimal[animal.GetAnimalType()];
-        if(!IsAngleOfEcosystem(animal.transform.position, ecosystem))
+        if (!IsAngleOfEcosystem(animal.transform.position, ecosystem))
         {
             animal.ChangeDirection();
         }

@@ -22,6 +22,47 @@ public class AnimalController : MonoBehaviour
     [SerializeField]
     float _reproductionJumpDistance;
 
+    [Header("KeyChallenge")]
+    [SerializeField]
+    float _KeyChallengeSecondsToFinish;
+    public float KeyChallengeSecondsToFinish
+    {
+        get
+        {
+            return _KeyChallengeSecondsToFinish;
+        }
+        set
+        {
+            _KeyChallengeSecondsToFinish = value;
+        }
+    }
+    [SerializeField]
+    float _KeyChallengeTimeBetweenKeys;
+    public float KeyChallengeTimeBetweenKeys
+    {
+        get
+        {
+            return _KeyChallengeTimeBetweenKeys;
+        }
+        set
+        {
+            _KeyChallengeTimeBetweenKeys = value;
+        }
+    }
+    [SerializeField]
+    float _KeyChallengeSpeed;
+    public float KeyChallengeSpeed
+    {
+        get
+        {
+            return _KeyChallengeSpeed;
+        }
+        set
+        {
+            _KeyChallengeSpeed = value;
+        }
+    }
+
     [Header("Others")]
 
     [SerializeField]

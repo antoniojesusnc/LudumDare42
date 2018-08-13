@@ -13,6 +13,8 @@ public class GUIManager : MonoBehaviour
     [SerializeField]
     GUIInGame _guiPause;
 
+    [SerializeField]
+    GUIInventory _guiInventory;
     private void Start()
     {
         Time.timeScale = 1;
@@ -30,6 +32,11 @@ public class GUIManager : MonoBehaviour
     public void OpenPauseGUI()
     {
         _guiPause.Show();
+    }
+
+    public void OpenInventory()
+    {
+        _guiInventory.Show();
     }
 
     private void Update()
@@ -62,6 +69,7 @@ public class GUIManager : MonoBehaviour
     public void ClickOnMainManu()
     {
         DestroyAllSingleton();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
 }
