@@ -8,6 +8,7 @@ public class InventoryController : MonoBehaviour
 
     [SerializeField]
     int _inventoryCapacity;
+
     public int InventoryCapacity
     {
         get { return _inventoryCapacity; }

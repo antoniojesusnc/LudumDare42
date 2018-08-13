@@ -69,7 +69,7 @@ public class GUIManager : MonoBehaviour
     public void ClickOnMainManu()
     {
         DestroyAllSingleton();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
 }

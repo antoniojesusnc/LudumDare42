@@ -254,7 +254,11 @@ public class LevelManager : MonoBehaviour
             allConditions &= animalData.Value <= _inventory.InventorySent[animalType];
         }
         if (allConditions)
-            FindObjectOfType<GUIManager>().OpenVictoryGUI();
+        {
+            var go = FindObjectOfType<GUIManager>();
+            if(go != null)
+                go.OpenVictoryGUI();
+        }
     }
 
     public Vector2 Rotate(Vector2 vector, float degrees)

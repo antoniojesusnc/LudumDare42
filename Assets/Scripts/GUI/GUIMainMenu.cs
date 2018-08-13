@@ -4,9 +4,29 @@ using UnityEngine;
 
 public class GUIMainMenu : MonoBehaviour {
 
-	public void ClickOnNewGame()
+    Vector3 _originalPos;
+
+    [SerializeField]
+    Transform _camera;
+
+    [SerializeField]
+    Transform _cameraFirstPosition;
+    [SerializeField]
+    float _timeFirstPos;
+    [SerializeField]
+    Transform _cameraSecondPosition;
+    [SerializeField]
+    float _timeSecondPos;
+
+    private void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        _originalPos = _camera.position;
+    }
+    public void ClickOnNewGame()
+    {
+        //LeanTween.move(_camera.gameObject, _cameraFirstPosition.position, _timeFirstPos);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        
     }
 
     public void ClickONExit()
@@ -21,3 +41,4 @@ public class GUIMainMenu : MonoBehaviour {
 
 
 }
+
