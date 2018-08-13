@@ -33,6 +33,10 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     [SerializeField]
     PlanetController _planet;
 
+
+    // inventory
+    InventoryController _inventory;
+
     void Start()
     {
         StartLevel();
@@ -40,6 +44,8 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     void StartLevel()
     {
+        _inventory = GetComponent<InventoryController>();
+
         AnimalAmount = new Dictionary<ETypeAnimal, int>();
         GenerateStartedAnimals();
 
@@ -95,11 +101,22 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
             animalAmount = Mathf.CeilToInt((_animalPoblation[i].MaxDangerAmount + _animalPoblation[i].MinDangerAmount) * 0.5f);
             AnimalAmount.Add(_animalPoblation[i].AnimalType, animalAmount);
+
             for (int j = 0; j < animalAmount; ++j)
             {
                 GenerateAnimal(animal);
             }
         }
+    }
+
+    internal void AnimalAbducedSuccessFul(AnimalController animalBeingAbduced)
+    {
+        _inventory.AddAnimal(animalBeingAbduced.GetAnimalType());
+        SetAbductionMode(false);
+        _allAnimals.Remove(animalBeingAbduced);
+        --AnimalAmount[animalBeingAbduced.GetAnimalType()];
+
+        Destroy(animalBeingAbduced.gameObject);
     }
 
     public void SetAbductionMode(bool setAbduction)
@@ -154,6 +171,19 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         if (!IsAbducting)
         {
             _planet.UpdatePlanet();
+        }
+
+        CheckLoseGame();
+    }
+
+    private void CheckLoseGame()
+    {
+        ETypeAnimal animalType;
+        foreach (var animalData in AnimalAmount)
+        {
+            animalType = animalData.Key;
+            if (animalData.Value > GetPoblationInfo(animalType).MaxAmount)
+                Debug.LogError("GameOver");
         }
     }
 }

@@ -63,7 +63,7 @@ public class PegiController : MonoBehaviour
     float _orbitTimeStamp;
     float _currentSpeed;
 
-    AnimalController _animalBeingAbduced;
+    public AnimalController AnimalBeingAbduced { get; private set; }
 
     PlanetController _planet;
 
@@ -97,11 +97,11 @@ public class PegiController : MonoBehaviour
 
     }
 
-    
+
 
     private void CheckShoot()
     {
-        if(IsInBotOrbit && _input.Shooting)
+        if (IsInBotOrbit && _input.Shooting)
         {
             //Debug.Log ("HI");
             RaycastHit HitInfo = new RaycastHit();
@@ -118,8 +118,10 @@ public class PegiController : MonoBehaviour
     private void StartAbductionMode(AnimalController animalBeingAbduced)
     {
         LevelManager.Instance.SetAbductionMode(true);
-        _animalBeingAbduced = animalBeingAbduced;
-        _animalBeingAbduced.StartAbduction() ;
+        AnimalBeingAbduced = animalBeingAbduced;
+        AnimalBeingAbduced.StartAbduction();
+
+
     }
 
     private void CheckFinishAbduction()
@@ -127,8 +129,17 @@ public class PegiController : MonoBehaviour
         if (_input.Shooting)
         {
             LevelManager.Instance.SetAbductionMode(false);
-            _animalBeingAbduced.FinishAbduction();
+            AnimalBeingAbduced.FinishAbduction();
         }
+    }
+
+    public void SusscessfulAbduction()
+    {
+        
+
+        LevelManager.Instance.AnimalAbducedSuccessFul(AnimalBeingAbduced);
+
+        AnimalBeingAbduced = null;
     }
 
     private void SetOrbitPosition()

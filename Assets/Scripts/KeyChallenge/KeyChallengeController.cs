@@ -72,6 +72,10 @@ public class KeyChallengeController : MonoBehaviour
     [Header("Others")]
     [SerializeField]
     PegiInput _input;
+    [SerializeField]
+    TMPro.TextMeshPro _feedBackText;
+    [SerializeField]
+    float _timeShowingFeedBackText;
 
     public float CompleteFactor
     {
@@ -98,7 +102,7 @@ public class KeyChallengeController : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("Debug InitChallenge");
-        InitChallenge(20, 0.7f, 2);
+        InitChallenge(10, 0.7f, 2);
     }
 
     private void OnDisable()
@@ -113,6 +117,7 @@ public class KeyChallengeController : MonoBehaviour
         _timeBetweenKeys = timeBetweenKeys;
 
         _keys = new List<KeyChallengeInfo>();
+        _feedBackText.gameObject.SetActive(false);
 
         _keyActives = new Dictionary<EKeys, List<KeyChallengeInfo>>();
         _keyActives.Add(EKeys.Left, new List<KeyChallengeInfo>());
@@ -128,6 +133,16 @@ public class KeyChallengeController : MonoBehaviour
     {
         _playing = false;
         StopAllCoroutines();
+
+        foreach (var keys in _keyActives)
+        {
+            for (int i = keys.Value.Count - 1; i >= 0; --i)
+            {
+                Destroy(keys.Value[i].ObjKey.gameObject);
+            }
+        }
+        _keyActives.Clear();
+
     }
 
     private void StartChallengeKeys()
@@ -151,6 +166,8 @@ public class KeyChallengeController : MonoBehaviour
         }
 
         CheckInputs();
+
+        CheckVictory();
     }
 
     private bool CheckNextTime()
@@ -250,9 +267,13 @@ public class KeyChallengeController : MonoBehaviour
             timeStamp += Time.deltaTime;
         }
 
+        if (!info.Success && !info.Failed)
+            FailKey(info);
+
         // here is when finish 
         _keyActives[info.key].Remove(info);
         Destroy(obj.gameObject);
+
     }
 
     private Transform CreateKey(EKeys key)
@@ -269,7 +290,13 @@ public class KeyChallengeController : MonoBehaviour
 
     private void GenerateInitialValues()
     {
-        _keys.Add(new KeyChallengeInfo(EKeys.Size, _initTime));
+        if(_speed > _initTime)
+        {
+            Debug.LogWarning("InitialTime must be grater than speed");
+        }
+
+        float initialTime = Math.Max(_initTime, _speed);
+        _keys.Add(new KeyChallengeInfo(EKeys.Size, initialTime));
 
         for (int i = 0; i < 5; ++i)
         {
@@ -315,21 +342,56 @@ public class KeyChallengeController : MonoBehaviour
             return EKeys.Up;
         return EKeys.Size;
     }
+
+    void CheckVictory()
+    {
+        if(CompleteFactor >= 1)
+        {
+            GetComponentInParent<PegiController>().SusscessfulAbduction();
+            StopChallenge();
+        }
+    }
+
+
     void SuccessKey(KeyChallengeInfo keyChallengeInfo, bool isPerfect = false)
     {
         keyChallengeInfo.Success = true;
+
+        _feedBackText.gameObject.SetActive(true);
+        _feedBackText.color = new Color(0.43f, 1, 0.43f);
+        LeanTween.delayedCall(_timeShowingFeedBackText, HideFeedBackMsg);
+
         if (isPerfect)
         {
             keyChallengeInfo.ObjKey.GetComponentInChildren<SpriteRenderer>().color = new Color(0.43f, 1, 0.43f);
             _secondsToFinish -= _timeToTakeIfPerfect;
+            _feedBackText.text = "PERFECT!";
+        }
+        else
+        {
+            _feedBackText.text = "GOOD";
         }
 
         keyChallengeInfo.ObjKey.transform.localScale = Vector3.one * 1.1f;
         Debug.Log("SuccessKey " + isPerfect);
+
+        LeanTween.cancel(_feedBackText.gameObject);
+
+        
+    }
+
+    private void HideFeedBackMsg()
+    {
+        _feedBackText.gameObject.SetActive(false);
     }
 
     void FailKey(KeyChallengeInfo keyChallengeInfo)
     {
+        _feedBackText.gameObject.SetActive(true);
+        _feedBackText.color = new Color(1, 0.4f, 0.4f);
+        LeanTween.delayedCall(_timeShowingFeedBackText, HideFeedBackMsg);
+        _feedBackText.text = "FAIL!";
+
         keyChallengeInfo.ObjKey.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 0.4f, 0.4f);
         _secondsToFinish += _timeToAddIfFail;
         keyChallengeInfo.Failed = true;

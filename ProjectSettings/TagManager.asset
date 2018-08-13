@@ -48,6 +48,9 @@ TagManager:
   - name: World
     uniqueID: 3342212849
     locked: 0
+  - name: Beam
+    uniqueID: 1227329735
+    locked: 0
   - name: Animal
     uniqueID: 3970818033
     locked: 0
