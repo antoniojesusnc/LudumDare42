@@ -1743,6 +1743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animTime: 1
+  _scaleFactor: 1.5
   _lowLimit: {fileID: 224014058760343440}
   _lowDangerLimit: {fileID: 224194594009154136}
   _highDangerLimit: {fileID: 224918720161492000}
@@ -1791,7 +1792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guiVictory: {fileID: 114285496758173952}
   _guiLose: {fileID: 114323611185366654}
-  _guiPause: {fileID: 0}
+  _guiPause: {fileID: 114408450049043914}
 --- !u!114 &114934266516852330
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,6 +8,9 @@ public class GUITopBar : MonoBehaviour
     [SerializeField]
     float _animTime;
 
+    [SerializeField]
+    float _scaleFactor;
+
     [Header("objs")]
     [SerializeField]
     RectTransform _lowLimit;
@@ -107,8 +110,8 @@ public class GUITopBar : MonoBehaviour
         {
             Vector2 finalPos = new Vector2(minLimit.anchoredPosition.x + distanceFromOrigin, _animalImages[animal].anchoredPosition.y);
             Vector3 finalScale = Vector3.one;
-            if(scaleFactor) finalScale = Vector3.Lerp(Vector3.one, Vector3.one * 2, factor);
-            if (reverseScaleFactor) finalScale = Vector3.Lerp(Vector3.one*2, Vector3.one, factor);
+            if(scaleFactor) finalScale = Vector3.Lerp(Vector3.one, Vector3.one * _scaleFactor, factor);
+            if (reverseScaleFactor) finalScale = Vector3.Lerp(Vector3.one* _scaleFactor, Vector3.one, factor);
             if (doAnim)
             {
                 LeanTween.move(_animalImages[animal], finalPos, _animTime);

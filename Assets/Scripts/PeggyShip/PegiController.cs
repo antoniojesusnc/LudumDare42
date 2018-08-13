@@ -24,7 +24,7 @@ public class PegiController : MonoBehaviour
     [SerializeField]
     float _modSpeedWhenNormalCloud;
     [SerializeField]
-    float _shockTime ;
+    float _shockTime;
 
     [SerializeField]
     float _orbitCoolDown;
@@ -123,9 +123,11 @@ public class PegiController : MonoBehaviour
             //Debug.DrawLine(transform.position, transform.position+ (Vector3)dir*5,Color.blue, 5);
             ContactFilter2D filter = new ContactFilter2D();
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 5, 1 << LayerMask.NameToLayer("Animal"));
-            if (hit.collider != null)
+            if (hit.collider != null )
             {
-                StartAbductionMode(hit.collider.GetComponentInParent<AnimalController>());
+                AnimalController animal = hit.collider.GetComponentInParent<AnimalController>();
+                if(!animal.IsReproducing)
+                    StartAbductionMode(animal);
             }
         }
     }

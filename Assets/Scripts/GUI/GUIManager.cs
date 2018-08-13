@@ -55,7 +55,7 @@ public class GUIManager : SingletonMonoBehaviour<GUIManager>
 
     public void ClickInRetry()
     {
-        DestroyAllSingleton();
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }

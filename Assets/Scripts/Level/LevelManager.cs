@@ -76,13 +76,31 @@ public class LevelManager : MonoBehaviour
 
         int randomAnimal = UnityEngine.Random.Range(0, animals.Count);
 
-        var newAnimal = Instantiate<AnimalController>(animals[0], _animalParent);
-        newAnimal.Init(animal);
-        newAnimal.transform.position = animals[randomAnimal].transform.position;
+        AnimalController animalMother = animals[randomAnimal];
+        StartCoroutine(ReproduceOneAnimalCo(animalMother));
+    }
+
+    private IEnumerator ReproduceOneAnimalCo(AnimalController animalMother)
+    {
+        animalMother.IsReproducing = true;
+
+        yield return new WaitForSeconds(animalMother.ReproductionTime);
+
+        var newAnimal = Instantiate<AnimalController>(animalMother, _animalParent);
+        newAnimal.IsReproducing = true;
+        newAnimal.Init(animalMother.GetAnimalType());
+        newAnimal.transform.position = animalMother.transform.position;
+
+        newAnimal.DoJumpReproduction(false);
+        animalMother.DoJumpReproduction(true);
 
         _allAnimals.Add(newAnimal);
 
-        ++AnimalAmount[animal];
+        ++AnimalAmount[animalMother.GetAnimalType()];
+
+        yield return new WaitForSeconds(animalMother.ReproductionJumpTime);
+        animalMother.IsReproducing = false;
+        newAnimal.IsReproducing = false;
     }
 
     private void GenerateStartedAnimals()

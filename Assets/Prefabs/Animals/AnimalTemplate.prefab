@@ -146,6 +146,10 @@ MonoBehaviour:
   _forceMax: 12
   _durationMin: 0.2
   _durationMax: 0.5
+  _jumpHeigh: 0.1
+  _jumpDuration: 0.2
+  _jumpFrecuencyMinTime: 2
+  _jumpFrecuencyMaxTime: 5
 --- !u!114 &114790343374520212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,9 +179,12 @@ MonoBehaviour:
   _maxSpeed: 0.5
   _minTimeChangeDirection: 1
   _maxTimeChangeDirection: 5
+  _reproductionJumpDistance: 0.2
   _typeAnimal: 0
   _input: {fileID: 114387556627602318}
   _orbitMovement: {fileID: 114790343374520212}
+  _reproductionTime: 0.5
+  _reproductionJumpTime: 0.4
 --- !u!212 &212234504820854710
 SpriteRenderer:
   m_ObjectHideFlags: 1
