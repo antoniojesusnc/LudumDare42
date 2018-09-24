@@ -1,5 +1,9 @@
-![alt text](https://raw.githubusercontent.com/antoniojesusnc/LudumDare42/master/ScreenShots/Capture02.png)
-![alt text](https://raw.githubusercontent.com/antoniojesusnc/LudumDare42/master/ScreenShots/Capture04.png)
+![alt text](https://github.com/antoniojesusnc/LudumDare42/blob/master/ScreenShots/Capture02.PNG)
+
+![alt text](https://github.com/antoniojesusnc/LudumDare42/blob/master/ScreenShots/Capture04.PNG)
+
+
+
 
 ## Description
 Description: Hey what's up, we are Norna Games and after 72 hours and a few liters of MONSTER and the supports of our stupid friends, here we are. We want to present you our fabulous, incredible, amazing and excelsior Space Crap. Read BoB and his captain for introduce the game.
@@ -18,4 +22,4 @@ Move the StarCraft with the arrows. Press space to start abduction. Check your m
 
 ## Credits
 * [Antonio Jesus Narvaez](https://github.com/antoniojesusnc)
-* [Francisco Francis](https://www.instagram.com/fsr_artist/)
+* [Francisco Javier](https://www.instagram.com/fsr_artist/)
