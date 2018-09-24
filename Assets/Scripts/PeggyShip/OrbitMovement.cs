@@ -73,6 +73,8 @@ public class OrbitMovement : MonoBehaviour
 
         }
 
+        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
+
         transform.position += transform.right * _currentSpeed * Time.deltaTime;
         SetOrbitPosition();
 
